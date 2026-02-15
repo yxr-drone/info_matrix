@@ -103,40 +103,19 @@
     
     <div class="main-content">
         <header>
-            <div id="author-title">📂 全部情报</div>
+            <div id="author-title">📂 全部情报流</div>
             <input type="text" class="search-bar" placeholder="搜索全球大牛的智慧..." oninput="search(this.value)">
         </header>
         
         <div class="feed" id="matrix-feed">
-            <!-- 加载中... -->
+            <!-- 动态加载内容 -->
         </div>
     </div>
 
+    <!-- 引用独立数据源 -->
+    <script src="matrix_data.js"></script>
     <script>
-        const matrixData = [
-  {
-    "id": "2026_microgpt_full",
-    "author": "Andrej Karpathy",
-    "date": "2026-02-12",
-    "title": "microgpt: My 200-line Art Project",
-    "url": "https://karpathy.github.io/2026/02/12/microgpt/",
-    "original": "This is a single file of 200 lines of pure Python with no dependencies that trains and inferences a GPT. It contains: dataset of documents, tokenizer, autograd engine, a GPT-2-like neural network architecture, Adam optimizer, training and inference loop. Everything else is just efficiency. I cannot simplify this any further. I think it is beautiful 🥹.",
-    "translation": "这是一个由 200 行纯 Python 代码组成的单文件艺术项目，没有任何依赖项，却能完成 GPT 的训练与推理。它包含：文档数据集、分词器、自动求导引擎、类 GPT-2 神经网络架构、Adam 优化器、训练和推理循环。除此之外的一切只是为了提高效率。我无法再进一步简化它了。我觉得它非常美丽 🥹。",
-    "media": ["https://karpathy.github.io/assets/microgpt.png"],
-    "links": ["https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95"]
-  },
-  {
-    "id": "feifei_2025_vision",
-    "author": "Fei-Fei Li",
-    "date": "2025-11-15",
-    "title": "The Worlds I See: A Human-Centered AI Vision",
-    "url": "https://profiles.stanford.edu/fei-fei-li",
-    "original": "Artificial Intelligence is no longer just a technical pursuit; it is a human one. Our challenge is to build machines that perceive the world as humans do, while ensuring they serve human values. My new research explores Spatial Intelligence as the next frontier for computer vision.",
-    "translation": "人工智能不再仅仅是一项技术追求，它是一项人类追求。我们的挑战是制造出能像人类一样感知世界的机器，同时确保它们服务于人类价值。我的新研究正在探索“空间智能”，视其为计算机视觉的下一个前沿。",
-    "media": ["https://hai.stanford.edu/sites/default/files/styles/hero_image_large/public/2023-10/Fei-Fei%20Li%20Book%20Cover.jpg"],
-    "links": ["https://hai.stanford.edu/"]
-  }
-];
+        // ... 原有的 JS 逻辑，但删掉硬编码的 matrixData
 
         let currentAuthor = 'All';
 
