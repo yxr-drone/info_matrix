@@ -12,7 +12,7 @@
   {
     "author": "Sam Altman",
     "date": "Feb 15, 2026",
-    "id": "sa_824219521085524977",
+    "id": "sa_6749617411515308256",
     "title": "Sam Altman",
     "original": "Musings on the future of AI and Silicon Valley.",
     "url": "https://blog.samaltman.com/",
@@ -269,13 +269,42 @@
     "translation": "（同步中：microgpt）"
   },
   {
+    "author": "Andrej Karpathy",
+    "date": "Feb 15, 2026",
+    "id": "ak_x_sora_physics",
+    "title": "深度分析：Sora 是一个世界模拟器吗？",
+    "isHot": true,
+    "original": "Sora is not just a video generator, it's a learned physics engine. However, it still fails on complex causal chains. We are seeing the first steps toward a digital twin of reality.",
+    "translation": "Karpathy 认为 Sora 不仅仅是一个视频生成器，它更像是一个“学习型物理引擎”。尽管它在复杂的因果链上仍会出错，但这标志着人类正迈向现实世界的数字孪生。",
+    "url": "https://x.com/karpathy"
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Feb 10, 2026",
+    "id": "ak_x_llm101n",
+    "title": "LLM 101n: 正在编写的大模型底层课程",
+    "isHot": true,
+    "original": "Currently working on LLM 101n. The goal is to build a full story from a single 'bit' of information to a full-blown ChatGPT assistant.",
+    "translation": "Karpathy 正在编写他的新课程 LLM 101n。目标是让学生理解从最基础的一个比特信息，到构建出像 ChatGPT 这样成熟的智能助手的全过程。",
+    "url": "https://github.com/karpathy/LLM101n"
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Feb 05, 2026",
+    "id": "ak_x_spatial_ai",
+    "title": "空间智能将是机器人学的下一个前沿",
+    "original": "Spatial intelligence is the gap between current LLMs and the robots of our dreams. We need models that understand geometry, not just tokens.",
+    "translation": "Karpathy 指出，空间智能是当前大模型与理想机器人之间的鸿沟。我们需要能够理解几何结构、而不仅仅是理解 Token 的模型。",
+    "url": "https://x.com/karpathy"
+  },
+  {
     "author": "OpenAI",
     "date": "Feb 15, 2026",
     "id": "oa_latest_sora",
     "title": "Sora 进阶版：支持全 4K 物理模拟生成",
     "isHot": true,
     "original": "OpenAI announces significant updates to Sora, enabling full 4K resolution with enhanced physical consistency in generated videos.",
-    "translation": "OpenAI 宣布 Sora 迎来重大更新：现已支持全 4K 分辨率生成，并显著增强了生成视频中的物理一致性（如流体动力学和光影追踪）。",
+    "translation": "OpenAI 宣布 Sora 迎来重大更新：现已支持全 4K 分辨率生成，并显著增强了生成视频中的物理一致性。",
     "url": "https://openai.com/news/"
   },
   {
@@ -284,8 +313,8 @@
     "id": "sa_future_compute",
     "title": "论算力即主权：AI 时代的能源挑战",
     "isHot": true,
-    "original": "Sam Altman discusses the critical need for global energy infrastructure to support the next generation of planetary-scale computing.",
-    "translation": "Sam Altman 撰文探讨了全球能源基础设施建设的紧迫性。他指出，算力已成为国家主权的核心，而充足的能源供应将是实现行星级 AI 计算的关键瓶颈。",
+    "original": "Sam Altman discusses the critical need for global energy infrastructure to support next generation computing.",
+    "translation": "Sam Altman 探讨了全球能源基础设施对下一代计算的重要性，认为算力已成为一种国家主权。",
     "url": "https://blog.samaltman.com/"
   },
   {
@@ -294,18 +323,8 @@
     "id": "ff_2025_award",
     "title": "李飞飞教授获 2025 伊丽莎白女王工程奖",
     "isHot": true,
-    "original": "Recognized for her transformative contributions to computer vision and AI through the creation of ImageNet.",
-    "translation": "李飞飞教授荣获伊丽莎白女王工程奖，以表彰她通过 ImageNet 为计算机视觉和现代 AI 奠定的基石性贡献。",
+    "original": "Recognized for her transformative contributions to computer vision and AI.",
+    "translation": "李飞飞教授荣获 2025 年伊丽莎白女王工程奖，表彰她在计算机视觉领域的基石性贡献。",
     "url": "https://profiles.stanford.edu/fei-fei-li"
-  },
-  {
-    "author": "Andrej Karpathy",
-    "date": "Feb 12, 2026",
-    "id": "ak_microgpt",
-    "title": "microgpt: 200 行 Python 实现完整 GPT",
-    "isHot": true,
-    "original": "A beautiful 200-line implementation of a GPT model from scratch in pure Python.",
-    "translation": "Karpathy 展示了如何用仅 200 行纯 Python 代码（无外部依赖）完成 GPT 的训练与推理。这是目前最适合理解大模型架构的极简模本。",
-    "url": "https://karpathy.github.io/2026/02/12/microgpt/"
   }
 ]
