@@ -7,16 +7,16 @@
     "isHot": true,
     "original": "For the creation of ImageNet and leadership in AI.",
     "url": "https://profiles.stanford.edu/fei-fei-li",
-    "translation": "（同步中：荣获 2025 伊丽莎白女王工程奖）"
+    "translation": "New data: 荣获 2025 伊丽莎白女王工程奖"
   },
   {
     "author": "Sam Altman",
     "date": "Feb 15, 2026",
-    "id": "sa_6749617411515308256",
+    "id": "sa_-7924474702627543968",
     "title": "Sam Altman",
     "original": "Musings on the future of AI and Silicon Valley.",
     "url": "https://blog.samaltman.com/",
-    "translation": "（同步中：Sam Altman）"
+    "translation": "New data: Sam Altman"
   },
   {
     "author": "Andrej Karpathy",
@@ -26,7 +26,7 @@
     "original": "karpathy",
     "url": "https://karpathy.github.iohttps://twitter.com/karpathy",
     "isHot": false,
-    "translation": "（同步中：karpathy）"
+    "translation": "New data: karpathy"
   },
   {
     "author": "Andrej Karpathy",
@@ -36,7 +36,7 @@
     "original": "karpathy",
     "url": "https://karpathy.github.iohttps://github.com/karpathy",
     "isHot": false,
-    "translation": "（同步中：karpathy）"
+    "translation": "New data: karpathy"
   },
   {
     "author": "Andrej Karpathy",
@@ -46,7 +46,7 @@
     "original": "CIFAR-10 is a popular dataset small dataset for testing out Computer Vision Deep Learning learning methods. We're seeing a lot of improvements. But what is the human baseline?",
     "url": "https://karpathy.github.io/2011/04/27/manually-classifying-cifar10/",
     "isHot": false,
-    "translation": "（同步中：Lessons learned from manually classifying CIFAR-10）"
+    "translation": "New data: Lessons learned from manually classifying CIFAR-10"
   },
   {
     "author": "Andrej Karpathy",
@@ -56,7 +56,7 @@
     "original": "A depressing look at the state of Computer Vision Research and AI in general. For those who like to think that AI is anywhere close.",
     "url": "https://karpathy.github.io/2012/10/22/state-of-computer-vision/",
     "isHot": false,
-    "translation": "（同步中：The state of Computer Vision and AI: we are really, really far away.）"
+    "translation": "New data: The state of Computer Vision and AI: we are really, really far away."
   },
   {
     "author": "Andrej Karpathy",
@@ -66,7 +66,7 @@
     "original": "I illustrate a very valuable skill (Chrome Extension Programming) using a Twitter Case study. We will give Twitter a face lift, get it to refresh new tweets automatically, and highlight tweets from people who rarely tweet. All with a few lines of Javascript!",
     "url": "https://karpathy.github.io/2013/11/23/chrome-extension-programming/",
     "isHot": false,
-    "translation": "（同步中：Chrome Extension Programming: Illustrating a Basic Survival Skill with a Twitter Case Study）"
+    "translation": "New data: Chrome Extension Programming: Illustrating a Basic Survival Skill with a Twitter Case Study"
   },
   {
     "author": "Andrej Karpathy",
@@ -76,7 +76,7 @@
     "original": "I scraped Hacker News Front Page and New Page every minute for 50 days and analyzed the results. How do stories rise and fall on Hacker News? What makes a successful post? Find out in this post :)",
     "url": "https://karpathy.github.io/2013/11/27/quantifying-hacker-news/",
     "isHot": false,
-    "translation": "（同步中：Quantifying Hacker News with 50 days of data）"
+    "translation": "New data: Quantifying Hacker News with 50 days of data"
   },
   {
     "author": "Andrej Karpathy",
@@ -86,7 +86,7 @@
     "original": "I gave a (long) interview about my background and perspectives on neural nets.",
     "url": "https://karpathy.github.io/2014/04/26/datascience-weekly-interview/",
     "isHot": false,
-    "translation": "（同步中：Interview with Data Science Weekly on Neural Nets and ConvNetJS）"
+    "translation": "New data: Interview with Data Science Weekly on Neural Nets and ConvNetJS"
   },
   {
     "author": "Andrej Karpathy",
@@ -96,7 +96,7 @@
     "original": "I can't believe I lasted this long on Wordpress. I am switching permanently to Jekyll for hosting my blog, and so should you :) Details inside.",
     "url": "https://karpathy.github.io/2014/07/01/switching-to-jekyll/",
     "isHot": false,
-    "translation": "（同步中：Switching Blog from Wordpress to Jekyll）"
+    "translation": "New data: Switching Blog from Wordpress to Jekyll"
   },
   {
     "author": "Andrej Karpathy",
@@ -106,7 +106,7 @@
     "original": "A writeup of a recent mini-project: I scraped tweets of the top 500 Twitter accounts and used t-SNE to visualize the accounts so that people who tweet similar things are nearby. My final Javascript implementation of t-SNE is released on Github as tsnejs.",
     "url": "https://karpathy.github.io/2014/07/02/visualizing-top-tweeps-with-t-sne-in-Javascript/",
     "isHot": false,
-    "translation": "（同步中：Visualizing Top Tweeps with t-SNE, in Javascript）"
+    "translation": "New data: Visualizing Top Tweeps with t-SNE, in Javascript"
   },
   {
     "author": "Andrej Karpathy",
@@ -116,7 +116,7 @@
     "original": "Some reflections on the last two years of my research: The Quest for Unsupervised Feature Learning algorithms for visual data. Where it was, where it is, and where it's going. Maybe.",
     "url": "https://karpathy.github.io/2014/07/03/feature-learning-escapades/",
     "isHot": false,
-    "translation": "（同步中：Feature Learning Escapades）"
+    "translation": "New data: Feature Learning Escapades"
   },
   {
     "author": "Andrej Karpathy",
@@ -126,7 +126,7 @@
     "original": "Describing a new pet project that tracks active windows and keystroke frequencies over the duration of a day (on Ubuntu/OSX) and creates pretty HTML visualizations of the data. This allows me to gain nice insights into my productivity. Code on Github.",
     "url": "https://karpathy.github.io/2014/08/03/quantifying-productivity/",
     "isHot": false,
-    "translation": "（同步中：Quantifying Productivity）"
+    "translation": "New data: Quantifying Productivity"
   },
   {
     "author": "Andrej Karpathy",
@@ -136,7 +136,7 @@
     "original": "The latest state of the art Image Classification networks have only 6.7% Hit@5 error on ILSVRC 2014 classification task. How do humans compare?",
     "url": "https://karpathy.github.io/2014/09/02/what-i-learned-from-competing-against-a-convnet-on-imagenet/",
     "isHot": false,
-    "translation": "（同步中：What I learned from competing against a ConvNet on ImageNet）"
+    "translation": "New data: What I learned from competing against a ConvNet on ImageNet"
   },
   {
     "author": "Andrej Karpathy",
@@ -146,7 +146,7 @@
     "original": "There have been a few recent papers that fool ConvNets by taking a correctly classified image and perturbing it in an imperceptible way to produce an image that is misclassified. In this post I show that ConvNets are an overkill: Simple linear classifiers are in fact susceptible to the same fooling strategy.",
     "url": "https://karpathy.github.io/2015/03/30/breaking-convnets/",
     "isHot": false,
-    "translation": "（同步中：Breaking Linear Classifiers on ImageNet）"
+    "translation": "New data: Breaking Linear Classifiers on ImageNet"
   },
   {
     "author": "Andrej Karpathy",
@@ -156,7 +156,7 @@
     "original": "We'll train and sample from character-level RNN language models that learn to write poetry, latex math and code. We'll also analyze the models and get hints of future research directions.",
     "url": "https://karpathy.github.io/2015/05/21/rnn-effectiveness/",
     "isHot": false,
-    "translation": "（同步中：The Unreasonable Effectiveness of Recurrent Neural Networks）"
+    "translation": "New data: The Unreasonable Effectiveness of Recurrent Neural Networks"
   },
   {
     "author": "Andrej Karpathy",
@@ -166,7 +166,7 @@
     "original": "We will look at Convolutional Neural Networks, with a fun example of training them to classify #selfies as good/bad based on a scraped dataset of 2 million selfies.",
     "url": "https://karpathy.github.io/2015/10/25/selfie/",
     "isHot": false,
-    "translation": "（同步中：What a Deep Neural Network thinks about your #selfie）"
+    "translation": "New data: What a Deep Neural Network thinks about your #selfie"
   },
   {
     "author": "Andrej Karpathy",
@@ -176,7 +176,7 @@
     "original": "The first part of a short story collection that has been on my mind for a long while. Exciting! :)",
     "url": "https://karpathy.github.io/2015/11/14/ai/",
     "isHot": false,
-    "translation": "（同步中：Short Story on AI: A Cognitive Discontinuity.）"
+    "translation": "New data: Short Story on AI: A Cognitive Discontinuity."
   },
   {
     "author": "Andrej Karpathy",
@@ -186,7 +186,7 @@
     "original": "I'll discuss the core ideas, pros and cons of policy gradients, a standard approach to the rapidly growing and exciting area of deep reinforcement learning. As a running example we'll learn to play ATARI 2600 Pong from raw pixels.",
     "url": "https://karpathy.github.io/2016/05/31/rl/",
     "isHot": false,
-    "translation": "（同步中：Deep Reinforcement Learning: Pong from Pixels）"
+    "translation": "New data: Deep Reinforcement Learning: Pong from Pixels"
   },
   {
     "author": "Andrej Karpathy",
@@ -196,7 +196,7 @@
     "original": "A collection of tips/tricks for navigating the PhD experience.",
     "url": "https://karpathy.github.io/2016/09/07/phd/",
     "isHot": false,
-    "translation": "（同步中：A Survival Guide to a PhD）"
+    "translation": "New data: A Survival Guide to a PhD"
   },
   {
     "author": "Andrej Karpathy",
@@ -206,7 +206,7 @@
     "original": "Yes I'm still around but, I've started posting on Medium instead of here.",
     "url": "https://karpathy.github.io/2018/01/20/medium/",
     "isHot": false,
-    "translation": "（同步中：(started posting on Medium instead)）"
+    "translation": "New data: (started posting on Medium instead)"
   },
   {
     "author": "Andrej Karpathy",
@@ -216,7 +216,7 @@
     "original": "A collection of practical advice for the process of achieving strong results with neural networks.",
     "url": "https://karpathy.github.io/2019/04/25/recipe/",
     "isHot": false,
-    "translation": "（同步中：A Recipe for Training Neural Networks）"
+    "translation": "New data: A Recipe for Training Neural Networks"
   },
   {
     "author": "Andrej Karpathy",
@@ -226,7 +226,7 @@
     "original": "Dipping toes into biochemistry, energy metabolism and running some biohacking lite experiments.",
     "url": "https://karpathy.github.io/2020/06/11/biohacking-lite/",
     "isHot": false,
-    "translation": "（同步中：Biohacking Lite）"
+    "translation": "New data: Biohacking Lite"
   },
   {
     "author": "Andrej Karpathy",
@@ -236,7 +236,7 @@
     "original": "A story of an existential crisis under the hood of a humble forward pass.",
     "url": "https://karpathy.github.io/2021/03/27/forward-pass/",
     "isHot": false,
-    "translation": "（同步中：Short Story on AI: Forward Pass）"
+    "translation": "New data: Short Story on AI: Forward Pass"
   },
   {
     "author": "Andrej Karpathy",
@@ -246,7 +246,7 @@
     "original": "We are going to create, digitally sign, and broadcast a Bitcoin transaction in pure Python, from scratch, and with zero dependencies",
     "url": "https://karpathy.github.io/2021/06/21/blockchain/",
     "isHot": false,
-    "translation": "（同步中：A from-scratch tour of Bitcoin in Python）"
+    "translation": "New data: A from-scratch tour of Bitcoin in Python"
   },
   {
     "author": "Andrej Karpathy",
@@ -256,17 +256,7 @@
     "original": "To my knowledge, LeCun et al. 1989 is the earliest real-world application of a neural net trained end-to-end with backpropagation. Can we improve on it using 33 years of progress in deep learning? What does 1989 deep learning look like to someone in 2022, and what will today's deep learning look like to someone in 2055?",
     "url": "https://karpathy.github.io/2022/03/14/lecun1989/",
     "isHot": false,
-    "translation": "（同步中：Deep Neural Nets: 33 years ago and 33 years from now）"
-  },
-  {
-    "author": "Andrej Karpathy",
-    "date": "Feb 12, 2026",
-    "id": "ak_2026_02_12_microgpt",
-    "title": "microgpt",
-    "original": "It takes 200 lines of pure, dependency-free Python to train and inference GPT. I cannot make this any shorter.",
-    "url": "https://karpathy.github.io/2026/02/12/microgpt/",
-    "isHot": true,
-    "translation": "（同步中：microgpt）"
+    "translation": "New data: Deep Neural Nets: 33 years ago and 33 years from now"
   },
   {
     "author": "Andrej Karpathy",
@@ -280,22 +270,23 @@
   },
   {
     "author": "Andrej Karpathy",
-    "date": "Feb 10, 2026",
-    "id": "ak_x_llm101n",
-    "title": "LLM 101n: 正在编写的大模型底层课程",
+    "date": "Feb 12, 2026",
+    "id": "ak_2026_02_12_microgpt",
+    "title": "microgpt: 200 行代码的艺术项目",
     "isHot": true,
-    "original": "Currently working on LLM 101n. The goal is to build a full story from a single 'bit' of information to a full-blown ChatGPT assistant.",
-    "translation": "Karpathy 正在编写他的新课程 LLM 101n。目标是让学生理解从最基础的一个比特信息，到构建出像 ChatGPT 这样成熟的智能助手的全过程。",
-    "url": "https://github.com/karpathy/LLM101n"
+    "original": "It takes 200 lines of pure, dependency-free Python to train and inference GPT. I cannot make this any shorter. I think it is beautiful 🥹.",
+    "translation": "Karpathy 发布了 microgpt：仅用 200 行纯 Python 代码实现了 GPT 全流程。这是极简主义的巅峰。",
+    "url": "https://karpathy.github.io/2026/02/12/microgpt/"
   },
   {
-    "author": "Andrej Karpathy",
-    "date": "Feb 05, 2026",
-    "id": "ak_x_spatial_ai",
-    "title": "空间智能将是机器人学的下一个前沿",
-    "original": "Spatial intelligence is the gap between current LLMs and the robots of our dreams. We need models that understand geometry, not just tokens.",
-    "translation": "Karpathy 指出，空间智能是当前大模型与理想机器人之间的鸿沟。我们需要能够理解几何结构、而不仅仅是理解 Token 的模型。",
-    "url": "https://x.com/karpathy"
+    "author": "Fei-Fei Li",
+    "date": "Feb 15, 2026",
+    "id": "ff_2025_award",
+    "title": "李飞飞教授获 2025 伊丽莎白女王工程奖",
+    "isHot": true,
+    "original": "Recognized for her transformative contributions to computer vision and AI through the creation of ImageNet.",
+    "translation": "李飞飞教授荣获 2025 年伊丽莎白女王工程奖，以表彰她通过 ImageNet 为计算机视觉和现代 AI 奠定的基石性贡献。",
+    "url": "https://profiles.stanford.edu/fei-fei-li"
   },
   {
     "author": "OpenAI",
@@ -306,25 +297,5 @@
     "original": "OpenAI announces significant updates to Sora, enabling full 4K resolution with enhanced physical consistency in generated videos.",
     "translation": "OpenAI 宣布 Sora 迎来重大更新：现已支持全 4K 分辨率生成，并显著增强了生成视频中的物理一致性。",
     "url": "https://openai.com/news/"
-  },
-  {
-    "author": "Sam Altman",
-    "date": "Feb 14, 2026",
-    "id": "sa_future_compute",
-    "title": "论算力即主权：AI 时代的能源挑战",
-    "isHot": true,
-    "original": "Sam Altman discusses the critical need for global energy infrastructure to support next generation computing.",
-    "translation": "Sam Altman 探讨了全球能源基础设施对下一代计算的重要性，认为算力已成为一种国家主权。",
-    "url": "https://blog.samaltman.com/"
-  },
-  {
-    "author": "Fei-Fei Li",
-    "date": "Feb 15, 2026",
-    "id": "ff_2025_award",
-    "title": "李飞飞教授获 2025 伊丽莎白女王工程奖",
-    "isHot": true,
-    "original": "Recognized for her transformative contributions to computer vision and AI.",
-    "translation": "李飞飞教授荣获 2025 年伊丽莎白女王工程奖，表彰她在计算机视觉领域的基石性贡献。",
-    "url": "https://profiles.stanford.edu/fei-fei-li"
   }
 ]

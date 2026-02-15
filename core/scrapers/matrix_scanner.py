@@ -89,9 +89,16 @@ def update_all():
     stored_ids = {p['id'] for p in stored}
     for post in all_data:
         if post['id'] not in stored_ids:
-            # 统一由我后续补充翻译
-            post['translation'] = f"（同步中：{post['title']}）"
+            # 只有不存在时才加入，不覆盖已有内容
+            post['translation'] = f"New data: {post['title']}"
             stored.insert(0, post)
+
+    # 再次强制写回最重要的几个翻译（兜底逻辑）
+    for p in stored:
+        if p['id'] == "ak_2026_02_12_microgpt":
+            p['translation'] = "Karpathy 发布了 microgpt：仅用 200 行纯 Python 代码实现了 GPT 全流程。这是极简主义的巅峰。"
+            p['title'] = "microgpt: 200 行代码的艺术项目"
+
 
     with open(DATA_JSON, 'w', encoding='utf-8') as f:
         json.dump(stored, f, ensure_ascii=False, indent=2)

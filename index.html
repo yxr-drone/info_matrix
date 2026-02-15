@@ -244,8 +244,8 @@
                     </div>
                     ${item.title ? `<div class="title">${item.title}</div>` : ''}
                     <div class="lang-block">
-                        ${(viewMode === 'dual' || viewMode === 'en') ? `<div class="lang-en">${item.original}</div>` : ''}
-                        ${(viewMode === 'dual' || viewMode === 'zh') ? `<div class="lang-zh">${item.translation}</div>` : ''}
+                        <div class="lang-en" style="margin-bottom: 8px;">${item.original}</div>
+                        <div class="lang-zh" style="color: var(--text-main); font-weight: 500; border-left: 3px solid var(--primary-color); padding-left: 12px;">${item.translation || '（翻译同步中...）'}</div>
                     </div>
                     ${item.media && item.media.length > 0 ? `
                     <div class="media-container"><img src="${item.media[0]}" onerror="this.style.display='none'"></div>
