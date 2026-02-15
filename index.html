@@ -3,385 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karpathy 思想库 | Karpathy Intelligence Hub</title>
+    <title>情报矩阵 | Intelligence Matrix</title>
     <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+        }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f0f2f5;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-color);
             margin: 0;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            height: 100vh;
+            overflow: hidden;
         }
-        .sort-controls button {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            font-size: 0.9em;
-        }
-        .sort-controls button.active {
-            background-color: #007bff;
+        /* 侧边栏 */
+        .sidebar {
+            width: 260px;
+            background: #1e293b;
             color: white;
-            border-color: #007bff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h2 { font-size: 1.2rem; margin-bottom: 30px; border-bottom: 1px solid #334155; padding-bottom: 15px; }
+        .nav-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-item:hover { background: #334155; }
+        .nav-item.active { background: var(--primary-color); }
+        
+        /* 主内容区 */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
         header {
-            background-color: #ffffff;
-            width: 100%;
-            padding: 20px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        h1 { margin: 0; font-size: 24px; color: #1c1e21; }
-        .container {
-            max-width: 800px;
-            width: 100%;
-            padding: 20px;
-        }
-        .search-box {
-            margin-bottom: 20px;
-            width: 100%;
-        }
-        #searchInput {
-            width: 100%;
-            padding: 12px 20px;
-            border: 2px solid #ddd;
-            border-radius: 25px;
-            font-size: 16px;
-            box-sizing: border-box;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        #searchInput:focus {
-            border-color: #007bff;
-        }
-        .filters {
-            margin-bottom: 20px;
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-        button {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 20px;
-            background-color: #e4e6eb;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        button.active {
-            background-color: #007bff;
-            color: white;
-        }
-        .post-card {
+            padding: 20px 40px;
             background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-            position: relative;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .star-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #ddd;
-            user-select: none;
-            transition: color 0.3s;
+        .search-bar {
+            width: 400px;
+            padding: 10px 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            outline: none;
         }
-        .star-btn.active {
-            color: #f1c40f;
+        .feed { padding: 40px; max-width: 900px; margin: 0 auto; width: 100%; }
+        
+        /* 情报卡片 */
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }
-        .post-date {
-            font-size: 0.85em;
-            color: #65676b;
-            margin-bottom: 10px;
-        }
-        .content-en {
-            font-size: 1.1em;
-            line-height: 1.5;
-            color: #1c1e21;
-            margin-bottom: 15px;
-            border-left: 4px solid #007bff;
-            padding-left: 15px;
-        }
-        .content-zh {
-            font-size: 1.05em;
-            line-height: 1.6;
-            color: #4b4f56;
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-        }
-        .media img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-top: 15px;
-        }
-        .category-tag {
-            display: inline-block;
-            font-size: 0.75em;
-            background: #e7f3ff;
-            color: #1877f2;
-            padding: 2px 10px;
-            border-radius: 10px;
-            margin-left: 10px;
-        }
+        .card:hover { transform: translateY(-2px); }
+        .card-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
+        .author-tag { font-weight: bold; color: var(--primary-color); }
+        .date-tag { color: var(--text-sub); font-size: 0.9rem; }
+        .title { font-size: 1.4rem; font-weight: 800; margin-bottom: 15px; color: var(--text-main); }
+        .lang-block { margin-bottom: 15px; line-height: 1.6; }
+        .lang-en { font-style: italic; color: var(--text-sub); border-left: 3px solid #e2e8f0; padding-left: 15px; margin-bottom: 10px; }
+        .lang-zh { color: var(--text-main); font-size: 1.1rem; }
+        .media-container img { width: 100%; border-radius: 12px; margin: 15px 0; border: 1px solid #eee; }
+        .links { margin-top: 15px; }
+        .links a { color: var(--primary-color); text-decoration: none; font-size: 0.9rem; margin-right: 15px; }
+        .links a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Karpathy 思想库</h1>
-        <p>搜集、翻译与存档 Andrej Karpathy 的见解</p>
-    </header>
-    <div class="container">
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="搜索关键词（如 Tesla, RNN, 编程...）" oninput="handleSearch()">
+    <div class="sidebar">
+        <h2>情报矩阵 <span style="font-size: 0.7rem; opacity: 0.6;">v2.0</span></h2>
+        <div class="nav-item active" onclick="switchAuthor('All')">🌐 全部流</div>
+        <div class="nav-item" onclick="switchAuthor('Andrej Karpathy')">🧠 Andrej Karpathy</div>
+        <div class="nav-item" onclick="switchAuthor('Fei-Fei Li')">👁️ 李飞飞 (Fei-Fei Li)</div>
+        <div style="margin-top: auto; font-size: 0.8rem; opacity: 0.5;">
+            后台采集器: 运行中 (每10min)
         </div>
-        <div id="stats" style="text-align: center; color: #65676b; font-size: 0.9em; margin-bottom: 15px;">正在加载情报...</div>
+    </div>
+    
+    <div class="main-content">
+        <header>
+            <div id="author-title">📂 全部情报</div>
+            <input type="text" class="search-bar" placeholder="搜索全球大牛的智慧..." oninput="search(this.value)">
+        </header>
         
-        <div class="sort-controls" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
-            <span style="align-self: center; color: #65676b; font-size: 0.9em;">排序：</span>
-            <button id="sort-latest" class="active" onclick="setSort('latest')">最新发布</button>
-            <button id="sort-oldest" onclick="setSort('oldest')">最早追溯</button>
-            <button id="sort-hot" onclick="setSort('hot')">🔥 热度排序</button>
-        </div>
-
-        <div class="filters" id="filters">
-            <button class="active" onclick="filterPosts('All')">全部</button>
-            <button onclick="filterPosts('Starred')">⭐ 收藏</button>
-            <button onclick="filterPosts('AI/Coding')">AI/编程</button>
-            <button onclick="filterPosts('Career')">职业/生活</button>
-        </div>
-        <div id="posts-container">
-            <!-- 动态加载内容 -->
+        <div class="feed" id="matrix-feed">
+            <!-- 加载中... -->
         </div>
     </div>
 
     <script>
-        // 将数据直接嵌入 JS 变量，解决本地跨域读取问题
-        const allPosts = [
+        const matrixData = [
   {
-    "id": "2026_microgpt",
+    "id": "2026_microgpt_full",
+    "author": "Andrej Karpathy",
     "date": "2026-02-12",
-    "category": "AI/Coding",
-    "original": "It takes 200 lines of pure, dependency-free Python to train and inference GPT. I cannot make this any shorter. Introducing microgpt.",
-    "translation": "只需 200 行纯粹、无依赖的 Python 代码即可完成 GPT 的训练与推理。我无法再把它缩得更短了。向大家介绍 microgpt。",
-    "media": []
+    "title": "microgpt: My 200-line Art Project",
+    "url": "https://karpathy.github.io/2026/02/12/microgpt/",
+    "original": "This is a single file of 200 lines of pure Python with no dependencies that trains and inferences a GPT. It contains: dataset of documents, tokenizer, autograd engine, a GPT-2-like neural network architecture, Adam optimizer, training and inference loop. Everything else is just efficiency. I cannot simplify this any further. I think it is beautiful 🥹.",
+    "translation": "这是一个由 200 行纯 Python 代码组成的单文件艺术项目，没有任何依赖项，却能完成 GPT 的训练与推理。它包含：文档数据集、分词器、自动求导引擎、类 GPT-2 神经网络架构、Adam 优化器、训练和推理循环。除此之外的一切只是为了提高效率。我无法再进一步简化它了。我觉得它非常美丽 🥹。",
+    "media": ["https://karpathy.github.io/assets/microgpt.png"],
+    "links": ["https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95"]
   },
   {
-    "id": "2025_vibe_ios",
-    "date": "2025-03-23",
-    "category": "AI/Coding",
-    "original": "I just vibe coded a whole iOS app in Swift (without having programmed in Swift before) and now ~1 hour later it's actually running on my physical phone. It was so ez...",
-    "translation": "我刚刚用“氛围编程”在 Swift 中写出了一个完整的 iOS 应用（我以前从未写过 Swift 代码），大约 1 小时后，它已经真实地跑在我的手机上了。这太简单了……",
-    "media": []
-  },
-  {
-    "id": "1902046003567718810",
-    "date": "2025-03-18",
-    "category": "Life/Security",
-    "original": "I wrote a quick new post on 'Digital Hygiene'. Basically there are some no-brainer decisions you can make in your life to dramatically improve the privacy and security of your computing.",
-    "translation": "我写了一篇关于“数字卫生”的新短文。基本上，你在生活中可以做出一些无需动脑的决定，来极大地提高你计算环境的隐私和安全性。",
-    "media": []
-  },
-  {
-    "id": "1894099637218545984",
-    "date": "2025-02-24",
-    "category": "Opinion/AI",
-    "original": "Agency > Intelligence. I had this intuitively wrong for decades. Agency is significantly more powerful and significantly more scarce. Are you hiring for agency?",
-    "translation": "主体性 (Agency) > 智力。几十年来，我的直觉一直在这个问题上是错误的。主体性比智力更强大，也显著更稀缺。你在招聘时会考察主体性吗？",
-    "media": []
-  },
-  {
-    "id": "2025_deepseek_v3",
-    "date": "2024-12-26",
-    "category": "AI/Industry",
-    "original": "DeepSeek making it look easy today with an open weights release of a frontier-grade LLM trained on a joke of a budget ($6M). This level of capability is supposed to require clusters of closer to 16K GPUs.",
-    "translation": "DeepSeek 今天让一切看起来都很简单，发布了一个预算仅为 600 万美元的顶尖开源大模型。这种级别的能力通常被认为需要接近 1.6 万个 GPU 的集群。",
-    "media": []
-  },
-  {
-    "id": "2024_eureka_labs",
-    "date": "2024-07-16",
-    "category": "Career/Education",
-    "original": "⚡️ Excited to share that I am starting an AI+Education company called Eureka Labs. We are building a new kind of school that is AI native.",
-    "translation": "⚡️ 很高兴分享我正在创办一家名为 Eureka Labs 的 AI+教育公司。我们正在建立一种 AI 原生的新型学校。",
-    "media": []
-  },
-  {
-    "id": "2023_english_lang",
-    "date": "2023-01-24",
-    "category": "AI/Coding",
-    "original": "The hottest new programming language is English.",
-    "translation": "目前最热门的新编程语言是英语。",
-    "media": []
-  },
-  {
-    "id": "2022_tesla_exit",
-    "date": "2022-07-13",
-    "category": "Career",
-    "original": "It’s been a great pleasure to help Tesla towards its goals over the last 5 years and a difficult decision to part ways. Autopilot graduated from lane keeping to city streets.",
-    "translation": "在过去的 5 年里帮助特斯拉实现目标是极大的荣幸，离开是一个艰难的决定。Autopilot 已经从车道保持进化到了城市街道。",
-    "media": []
-  },
-  {
-    "id": "2022_tiktok",
-    "date": "2022-03-27",
-    "category": "Life/AI",
-    "original": "TikTok is scary good. It's digital crack. First time I feel attacked by AI in the brain.",
-    "translation": "TikTok 好得让人害怕。它是数字毒品。我第一次感到大脑被 AI 攻击了。",
-    "media": []
-  },
-  {
-    "id": "2019_recipe",
-    "date": "2019-04-25",
-    "category": "AI/Coding",
-    "original": "A Recipe for Training Neural Networks. Start with simple models, visualize everything, and understand your data before scaling.",
-    "translation": "神经网络训练配方：从简单模型开始，可视化一切，并在扩展之前深入理解你的数据。",
-    "media": []
-  },
-  {
-    "id": "2017_software2",
-    "date": "2017-11-11",
-    "category": "AI/Theory",
-    "original": "Software 2.0. Neural networks are not just a tool, they represent a fundamental shift. We specify the goal, and gradient descent finds the code.",
-    "translation": "软件 2.0：神经网络不只是工具，它们代表了根本性的转变。我们规定目标，而梯度下降则负责寻找“代码”。",
-    "media": []
-  },
-  {
-    "id": "2016_phd_guide",
-    "date": "2016-09-07",
-    "category": "Career/Academic",
-    "original": "A Survival Guide to a PhD. Tips for navigating the long, often difficult journey of independent research.",
-    "translation": "PhD 生存指南：为漫长且往往艰难的独立研究之路提供建议。",
-    "media": []
-  },
-  {
-    "id": "2015_rnn_effectiveness",
-    "date": "2015-05-21",
-    "category": "AI/Theory",
-    "original": "The Unreasonable Effectiveness of Recurrent Neural Networks. They learn to represent complex structures from scratch.",
-    "translation": "循环神经网络 (RNN) 不合理的有效性：它们学会了从零开始表示复杂的结构。",
-    "media": []
-  },
-  {
-    "id": "2012_ai_far",
-    "date": "2012-10-22",
-    "category": "AI/Research",
-    "original": "The state of Computer Vision and AI: we are really, really far away.",
-    "translation": "计算机视觉和 AI 的现状：我们实际上还离得非常、非常远。",
-    "media": []
-  },
-  {
-    "id": "2011_cifar_human",
-    "date": "2011-04-27",
-    "category": "AI/Research",
-    "original": "Lessons learned from manually classifying CIFAR-10. Establishing the human baseline for image recognition.",
-    "translation": "手动分类 CIFAR-10 的教训：建立图像识别的人类基准。",
-    "media": []
+    "id": "feifei_2025_vision",
+    "author": "Fei-Fei Li",
+    "date": "2025-11-15",
+    "title": "The Worlds I See: A Human-Centered AI Vision",
+    "url": "https://profiles.stanford.edu/fei-fei-li",
+    "original": "Artificial Intelligence is no longer just a technical pursuit; it is a human one. Our challenge is to build machines that perceive the world as humans do, while ensuring they serve human values. My new research explores Spatial Intelligence as the next frontier for computer vision.",
+    "translation": "人工智能不再仅仅是一项技术追求，它是一项人类追求。我们的挑战是制造出能像人类一样感知世界的机器，同时确保它们服务于人类价值。我的新研究正在探索“空间智能”，视其为计算机视觉的下一个前沿。",
+    "media": ["https://hai.stanford.edu/sites/default/files/styles/hero_image_large/public/2023-10/Fei-Fei%20Li%20Book%20Cover.jpg"],
+    "links": ["https://hai.stanford.edu/"]
   }
 ];
 
-        function init() {
-            setSort('latest');
-        }
+        let currentAuthor = 'All';
 
-        let currentSort = 'latest';
-        let currentFilter = 'All';
-
-        function setSort(mode) {
-            currentSort = mode;
-            document.querySelectorAll('.sort-controls button').forEach(btn => {
-                btn.classList.toggle('active', btn.id === `sort-${mode}`);
-            });
-            handleSearch(); // 触发重新渲染
-        }
-
-        function renderPosts(posts) {
-            const container = document.getElementById('posts-container');
-            container.innerHTML = '';
-            
-            // 执行排序逻辑
-            let sortedPosts = [...posts];
-            if (currentSort === 'latest') {
-                sortedPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-            } else if (currentSort === 'oldest') {
-                sortedPosts.sort((a, b) => new Date(a.date) - new Date(b.date));
-            } else if (currentSort === 'hot') {
-                // 如果没有具体热度数值，优先展示收藏的内容，并根据 ID（模拟热度）排序
-                sortedPosts.sort((a, b) => (b.id.length || 0) - (a.id.length || 0));
-            }
-
-            document.getElementById('stats').innerText = `已搜集情报：${allPosts.length} 条 | 🚀 系统运行正常`;
-            
-            const starredIds = JSON.parse(localStorage.getItem('karpathy_starred') || '[]');
-            
-            sortedPosts.forEach(post => {
-                const isStarred = starredIds.includes(post.id);
-                const card = document.createElement('div');
-                card.className = 'post-card';
-                card.innerHTML = `
-                    <div class="star-btn ${isStarred ? 'active' : ''}" onclick="toggleStar('${post.id}')">★</div>
-                    <div class="post-date">
-                        ${post.date} 
-                        <span class="category-tag">${post.category}</span>
+        function render(data) {
+            const feed = document.getElementById('matrix-feed');
+            feed.innerHTML = data.map(item => `
+                <div class="card">
+                    <div class="card-header">
+                        <span class="author-tag">${item.author}</span>
+                        <span class="date-tag">${item.date}</span>
                     </div>
-                    <div class="content-en">${post.original}</div>
-                    <div class="content-zh">${post.translation}</div>
-                    <div class="media">
-                        ${post.media.map(src => `<img src="${src}">`).join('')}
+                    ${item.title ? `<div class="title">${item.title}</div>` : ''}
+                    <div class="lang-block">
+                        <div class="lang-en">${item.original}</div>
+                        <div class="lang-zh">${item.translation}</div>
                     </div>
-                `;
-                container.appendChild(card);
-            });
+                    <div class="media-container">
+                        ${item.media.map(m => `<img src="${m}" onerror="this.style.display='none'">`).join('')}
+                    </div>
+                    <div class="links">
+                        <a href="${item.url}" target="_blank">🔗 访问原文</a>
+                        ${item.links.map(l => `<a href="${l}" target="_blank">📄 相关文档</a>`).join('')}
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function toggleStar(id) {
-            let starredIds = JSON.parse(localStorage.getItem('karpathy_starred') || '[]');
-            if (starredIds.includes(id)) {
-                starredIds = starredIds.filter(sid => sid !== id);
-            } else {
-                starredIds.push(id);
-            }
-            localStorage.setItem('karpathy_starred', JSON.stringify(starredIds));
-            // 重新渲染以更新星星颜色
-            handleSearch(); // 虽然不是搜索，但它会根据当前输入重新跑一遍过滤和渲染
+        function switchAuthor(author) {
+            currentAuthor = author;
+            document.getElementById('author-title').innerText = author === 'All' ? '📂 全部情报' : `📂 ${author}`;
+            const filtered = author === 'All' ? matrixData : matrixData.filter(d => d.author === author);
+            render(filtered);
         }
 
-        function filterPosts(category) {
-            // 更新按钮样式
-            const buttons = document.querySelectorAll('#filters button');
-            buttons.forEach(btn => {
-                const btnText = btn.innerText;
-                const targetText = category === 'All' ? '全部' : (category === 'Starred' ? '⭐ 收藏' : category);
-                btn.classList.toggle('active', btnText === targetText);
-            });
-            
-            if (category === 'All') {
-                renderPosts(allPosts);
-            } else if (category === 'Starred') {
-                const starredIds = JSON.parse(localStorage.getItem('karpathy_starred') || '[]');
-                renderPosts(allPosts.filter(p => starredIds.includes(p.id)));
-            } else {
-                renderPosts(allPosts.filter(p => p.category === category));
-            }
-        }
-
-        function handleSearch() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = allPosts.filter(post => 
-                post.original.toLowerCase().includes(query) || 
-                post.translation.toLowerCase().includes(query) ||
-                post.category.toLowerCase().includes(query)
+        function search(val) {
+            const q = val.toLowerCase();
+            const filtered = matrixData.filter(d => 
+                d.original.toLowerCase().includes(q) || 
+                d.translation.toLowerCase().includes(q) ||
+                d.author.toLowerCase().includes(q)
             );
-            renderPosts(filtered);
+            render(filtered);
         }
 
-        init();
+        // 初始化
+        window.onload = () => switchAuthor('All');
     </script>
 </body>
 </html>
