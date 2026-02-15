@@ -182,6 +182,13 @@
                 <button id="view-zh" class="view-btn" onclick="setViewMode('zh')">中</button>
                 <button id="view-en" class="view-btn" onclick="setViewMode('en')">英</button>
             </div>
+            <div class="sort-controls" style="display: flex; background: var(--bg-color); padding: 3px; border-radius: 8px; border: 1px solid var(--border-color); gap: 2px;">
+                <select id="sort-select" onchange="setSort(this.value)" style="background: none; border: none; color: var(--text-main); font-size: 0.8rem; outline: none; cursor: pointer; padding: 2px 5px;">
+                    <option value="latest">📅 最新发布</option>
+                    <option value="oldest">⏳ 最早追溯</option>
+                    <option value="hot">🔥 热度排序</option>
+                </select>
+            </div>
             <button onclick="toggleTheme()" style="background: none; border: none; font-size: 1.2rem; cursor: pointer;">🌓</button>
         </header>
         
@@ -192,16 +199,35 @@
     <script>
         let currentAuthor = 'All';
         let viewMode = 'dual'; 
+        let currentSort = 'latest'; 
         let bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
 
         function render() {
             const feed = document.getElementById('matrix-feed');
-            const data = matrixData;
+            let data = [...matrixData];
             
+            // 1. 过滤
             let filteredData = data.filter(d => {
                 if (currentAuthor === 'Bookmarks') return bookmarks.includes(d.id);
                 return (currentAuthor === 'All' || d.author === currentAuthor);
             });
+
+            // 2. 排序逻辑
+            if (currentSort === 'latest') {
+                filteredData.sort((a, b) => new Date(b.date) - new Date(a.date));
+            } else if (currentSort === 'oldest') {
+                filteredData.sort((a, b) => new Date(a.date) - new Date(b.date));
+            } else if (currentSort === 'hot') {
+                filteredData.sort((a, b) => {
+                    const getScore = (item) => {
+                        let score = (item.original.length / 50); // 内容长度加成
+                        const daysAgo = (new Date() - new Date(item.date)) / (1000 * 60 * 60 * 24);
+                        if (daysAgo < 7) score += 10; // 7天内核弹级加成
+                        return score;
+                    };
+                    return getScore(b) - getScore(a);
+                });
+            }
 
             feed.innerHTML = filteredData.map(item => {
                 const isBookmarked = bookmarks.includes(item.id);
@@ -230,6 +256,11 @@
             viewMode = mode;
             document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById(`view-${mode}`).classList.add('active');
+            render();
+        }
+
+        function setSort(mode) {
+            currentSort = mode;
             render();
         }
 
