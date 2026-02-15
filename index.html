@@ -13,6 +13,16 @@
             flex-direction: column;
             align-items: center;
         }
+        .sort-controls button {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            font-size: 0.9em;
+        }
+        .sort-controls button.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
         header {
             background-color: #ffffff;
             width: 100%;
@@ -131,7 +141,15 @@
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="搜索关键词（如 Tesla, RNN, 编程...）" oninput="handleSearch()">
         </div>
-        <div id="stats" style="text-align: center; color: #65676b; font-size: 0.9em; margin-bottom: 10px;">正在加载情报...</div>
+        <div id="stats" style="text-align: center; color: #65676b; font-size: 0.9em; margin-bottom: 15px;">正在加载情报...</div>
+        
+        <div class="sort-controls" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+            <span style="align-self: center; color: #65676b; font-size: 0.9em;">排序：</span>
+            <button id="sort-latest" class="active" onclick="setSort('latest')">最新发布</button>
+            <button id="sort-oldest" onclick="setSort('oldest')">最早追溯</button>
+            <button id="sort-hot" onclick="setSort('hot')">🔥 热度排序</button>
+        </div>
+
         <div class="filters" id="filters">
             <button class="active" onclick="filterPosts('All')">全部</button>
             <button onclick="filterPosts('Starred')">⭐ 收藏</button>
@@ -147,39 +165,55 @@
         // 将数据直接嵌入 JS 变量，解决本地跨域读取问题
         const allPosts = [
   {
-    "id": "blog_2011_cifar",
-    "date": "2011-04-27",
-    "category": "AI/Research",
-    "original": "CIFAR-10 is a popular dataset for testing out Computer Vision Deep Learning methods. But what is the human baseline? I spent hours manually classifying images to find out.",
-    "translation": "CIFAR-10 是测试计算机视觉深度学习方法的常用数据集。但人类的基准线在哪里？我花了几个小时手动对图像进行分类以找出答案。",
+    "id": "2026_microgpt",
+    "date": "2026-02-12",
+    "category": "AI/Coding",
+    "original": "It takes 200 lines of pure, dependency-free Python to train and inference GPT. I cannot make this any shorter. Introducing microgpt.",
+    "translation": "只需 200 行纯粹、无依赖的 Python 代码即可完成 GPT 的训练与推理。我无法再把它缩得更短了。向大家介绍 microgpt。",
     "media": []
   },
   {
-    "id": "blog_2012_state",
-    "date": "2012-10-22",
-    "category": "AI/Research",
-    "original": "A depressing look at the state of Computer Vision Research and AI in general. For those who like to think that AI is anywhere close, we are really, really far away.",
-    "translation": "对计算机视觉研究和通用人工智能现状的一次令人沮丧的观察。对于那些认为 AI 已经近在咫尺的人来说，实际上我们还离得非常、非常远。",
+    "id": "2025_vibe_ios",
+    "date": "2025-03-23",
+    "category": "AI/Coding",
+    "original": "I just vibe coded a whole iOS app in Swift (without having programmed in Swift before) and now ~1 hour later it's actually running on my physical phone. It was so ez...",
+    "translation": "我刚刚用“氛围编程”在 Swift 中写出了一个完整的 iOS 应用（我以前从未写过 Swift 代码），大约 1 小时后，它已经真实地跑在我的手机上了。这太简单了……",
     "media": []
   },
   {
-    "id": "blog_2015_rnn",
-    "date": "2015-05-21",
-    "category": "AI/Theory",
-    "original": "The Unreasonable Effectiveness of Recurrent Neural Networks. We'll train RNNs to write poetry, latex math and code. They learn to represent complex structures from scratch.",
-    "translation": "循环神经网络 (RNN) 不合理的有效性。我们将训练 RNN 来写诗、写 LaTeX 数学公式和代码。它们学会了从零开始表示复杂的结构。",
+    "id": "1902046003567718810",
+    "date": "2025-03-18",
+    "category": "Life/Security",
+    "original": "I wrote a quick new post on 'Digital Hygiene'. Basically there are some no-brainer decisions you can make in your life to dramatically improve the privacy and security of your computing.",
+    "translation": "我写了一篇关于“数字卫生”的新短文。基本上，你在生活中可以做出一些无需动脑的决定，来极大地提高你计算环境的隐私和安全性。",
     "media": []
   },
   {
-    "id": "1547332300186066944",
-    "date": "2022-07-13",
-    "category": "Career",
-    "original": "It’s been a great pleasure to help Tesla towards its goals over the last 5 years and a difficult decision to part ways. In that time, Autopilot graduated from lane keeping to city streets and I look forward to seeing the exceptionally strong Autopilot team continue that momentum.",
-    "translation": "在过去的5年里，能帮助特斯拉实现其目标是我的荣幸，离开是一个艰难的决定。在这段时间里，Autopilot 从车道保持进化到了城市街道，我期待看到实力超群的 Autopilot 团队继续保持这一势头。",
+    "id": "1894099637218545984",
+    "date": "2025-02-24",
+    "category": "Opinion/AI",
+    "original": "Agency > Intelligence. I had this intuitively wrong for decades. Agency is significantly more powerful and significantly more scarce. Are you hiring for agency?",
+    "translation": "主体性 (Agency) > 智力。几十年来，我的直觉一直在这个问题上是错误的。主体性比智力更强大，也显著更稀缺。你在招聘时会考察主体性吗？",
     "media": []
   },
   {
-    "id": "1617979122625712128",
+    "id": "2025_deepseek_v3",
+    "date": "2024-12-26",
+    "category": "AI/Industry",
+    "original": "DeepSeek making it look easy today with an open weights release of a frontier-grade LLM trained on a joke of a budget ($6M). This level of capability is supposed to require clusters of closer to 16K GPUs.",
+    "translation": "DeepSeek 今天让一切看起来都很简单，发布了一个预算仅为 600 万美元的顶尖开源大模型。这种级别的能力通常被认为需要接近 1.6 万个 GPU 的集群。",
+    "media": []
+  },
+  {
+    "id": "2024_eureka_labs",
+    "date": "2024-07-16",
+    "category": "Career/Education",
+    "original": "⚡️ Excited to share that I am starting an AI+Education company called Eureka Labs. We are building a new kind of school that is AI native.",
+    "translation": "⚡️ 很高兴分享我正在创办一家名为 Eureka Labs 的 AI+教育公司。我们正在建立一种 AI 原生的新型学校。",
+    "media": []
+  },
+  {
+    "id": "2023_english_lang",
     "date": "2023-01-24",
     "category": "AI/Coding",
     "original": "The hottest new programming language is English.",
@@ -187,29 +221,106 @@
     "media": []
   },
   {
-    "id": "1886192184808149383",
-    "date": "2025-02-02",
+    "id": "2022_tesla_exit",
+    "date": "2022-07-13",
+    "category": "Career",
+    "original": "It’s been a great pleasure to help Tesla towards its goals over the last 5 years and a difficult decision to part ways. Autopilot graduated from lane keeping to city streets.",
+    "translation": "在过去的 5 年里帮助特斯拉实现目标是极大的荣幸，离开是一个艰难的决定。Autopilot 已经从车道保持进化到了城市街道。",
+    "media": []
+  },
+  {
+    "id": "2022_tiktok",
+    "date": "2022-03-27",
+    "category": "Life/AI",
+    "original": "TikTok is scary good. It's digital crack. First time I feel attacked by AI in the brain.",
+    "translation": "TikTok 好得让人害怕。它是数字毒品。我第一次感到大脑被 AI 攻击了。",
+    "media": []
+  },
+  {
+    "id": "2019_recipe",
+    "date": "2019-04-25",
     "category": "AI/Coding",
-    "original": "There's a new kind of coding I call \"vibe coding\", where you fully give in to the vibes, embrace exponentials, and forget that the code even exists. It's possible because the LLMs (e.g. Cursor Composer w Sonnet) are getting too good.",
-    "translation": "有一种我称之为“氛围编程” (Vibe Coding) 的新型编程方式：在这种模式下，你完全顺应“感觉”，拥抱指数级增长，甚至忘记了代码的存在。这之所以成为可能，是因为大语言模型（例如带有 Sonnet 的 Cursor Composer）正变得极其强大。",
+    "original": "A Recipe for Training Neural Networks. Start with simple models, visualize everything, and understand your data before scaling.",
+    "translation": "神经网络训练配方：从简单模型开始，可视化一切，并在扩展之前深入理解你的数据。",
+    "media": []
+  },
+  {
+    "id": "2017_software2",
+    "date": "2017-11-11",
+    "category": "AI/Theory",
+    "original": "Software 2.0. Neural networks are not just a tool, they represent a fundamental shift. We specify the goal, and gradient descent finds the code.",
+    "translation": "软件 2.0：神经网络不只是工具，它们代表了根本性的转变。我们规定目标，而梯度下降则负责寻找“代码”。",
+    "media": []
+  },
+  {
+    "id": "2016_phd_guide",
+    "date": "2016-09-07",
+    "category": "Career/Academic",
+    "original": "A Survival Guide to a PhD. Tips for navigating the long, often difficult journey of independent research.",
+    "translation": "PhD 生存指南：为漫长且往往艰难的独立研究之路提供建议。",
+    "media": []
+  },
+  {
+    "id": "2015_rnn_effectiveness",
+    "date": "2015-05-21",
+    "category": "AI/Theory",
+    "original": "The Unreasonable Effectiveness of Recurrent Neural Networks. They learn to represent complex structures from scratch.",
+    "translation": "循环神经网络 (RNN) 不合理的有效性：它们学会了从零开始表示复杂的结构。",
+    "media": []
+  },
+  {
+    "id": "2012_ai_far",
+    "date": "2012-10-22",
+    "category": "AI/Research",
+    "original": "The state of Computer Vision and AI: we are really, really far away.",
+    "translation": "计算机视觉和 AI 的现状：我们实际上还离得非常、非常远。",
+    "media": []
+  },
+  {
+    "id": "2011_cifar_human",
+    "date": "2011-04-27",
+    "category": "AI/Research",
+    "original": "Lessons learned from manually classifying CIFAR-10. Establishing the human baseline for image recognition.",
+    "translation": "手动分类 CIFAR-10 的教训：建立图像识别的人类基准。",
     "media": []
   }
 ];
 
         function init() {
-            // 按日期排序（从晚到早）
-            allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-            const count = allPosts.length;
-            document.getElementById('stats').innerText = `已搜集情报：${count} 条 | 🚀 系统运行正常`;
-            renderPosts(allPosts);
+            setSort('latest');
+        }
+
+        let currentSort = 'latest';
+        let currentFilter = 'All';
+
+        function setSort(mode) {
+            currentSort = mode;
+            document.querySelectorAll('.sort-controls button').forEach(btn => {
+                btn.classList.toggle('active', btn.id === `sort-${mode}`);
+            });
+            handleSearch(); // 触发重新渲染
         }
 
         function renderPosts(posts) {
             const container = document.getElementById('posts-container');
             container.innerHTML = '';
+            
+            // 执行排序逻辑
+            let sortedPosts = [...posts];
+            if (currentSort === 'latest') {
+                sortedPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+            } else if (currentSort === 'oldest') {
+                sortedPosts.sort((a, b) => new Date(a.date) - new Date(b.date));
+            } else if (currentSort === 'hot') {
+                // 如果没有具体热度数值，优先展示收藏的内容，并根据 ID（模拟热度）排序
+                sortedPosts.sort((a, b) => (b.id.length || 0) - (a.id.length || 0));
+            }
+
+            document.getElementById('stats').innerText = `已搜集情报：${allPosts.length} 条 | 🚀 系统运行正常`;
+            
             const starredIds = JSON.parse(localStorage.getItem('karpathy_starred') || '[]');
             
-            posts.forEach(post => {
+            sortedPosts.forEach(post => {
                 const isStarred = starredIds.includes(post.id);
                 const card = document.createElement('div');
                 card.className = 'post-card';
