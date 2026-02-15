@@ -5,83 +5,85 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import time
 
-# 环境检测与路径配置
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_JSON = os.path.join(BASE_DIR, "../data/matrix.json")
 DATA_JS = os.path.join(BASE_DIR, "../../matrix_data.js")
 
-def fetch_with_retry(url, retries=3):
-    for i in range(retries):
-        try:
-            res = requests.get(url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
-            res.raise_for_status()
-            return res.text
-        except Exception as e:
-            print(f"尝试 {i+1} 失败: {url} - {e}")
-            time.sleep(2)
-    return None
-
 def fetch_karpathy_blog():
-    html = fetch_with_retry("https://karpathy.github.io/")
-    if not html: return []
-    
-    soup = BeautifulSoup(html, 'html.parser')
-    posts = []
-    for item in soup.find_all('li'):
-        date_span = item.find('span')
-        link_tag = item.find('a')
-        if date_span and link_tag:
+    print("同步 Karpathy 博客数据...")
+    url = "https://karpathy.github.io/"
+    headers = {"User-Agent": "Mozilla/5.0"}
+    try:
+        res = requests.get(url, timeout=15, headers=headers)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        posts = []
+        for item in soup.find_all('li'):
+            date_span = item.find('span')
+            link_tag = item.find('a')
+            if not date_span or not link_tag: continue
+            
+            title = link_tag.text.strip()
+            link = f"https://karpathy.github.io{link_tag['href']}"
+            
+            # 提取完整的摘要（获取 li 内所有非标签文本）
+            summary = item.get_text(" ", strip=True).replace(date_span.text, "").replace(link_tag.text, "").strip()
+            
             posts.append({
                 "author": "Andrej Karpathy",
                 "date": date_span.text.strip(),
                 "id": f"ak_{link_tag['href'].strip('/').replace('/', '_')}",
-                "title": link_tag.text.strip(),
-                "original": item.get_text(strip=True).replace(date_span.text, "").replace(link_tag.text, "").strip(),
-                "url": f"https://karpathy.github.io{link_tag['href']}"
+                "title": title,
+                "original": summary,
+                "url": link,
+                "isHot": ("microgpt" in title.lower() or "recipe" in title.lower())
             })
-    return posts
+        return posts
+    except Exception as e:
+        print(f"抓取失败: {e}")
+        return []
 
-def update_system():
-    print(f"[{datetime.now()}] 启动情报采集流...")
+def update():
     new_data = fetch_karpathy_blog()
     
-    # 读取旧数据
+    # 始终包含手工精选的深度内容
+    feifei_latest = {
+        "author": "Fei-Fei Li",
+        "date": "Feb 15, 2026",
+        "id": "ff_qeprize_2025",
+        "title": "荣获 2025 伊丽莎白女王工程奖",
+        "isHot": True,
+        "original": "Recognized for her transformative contributions to AI, specifically the creation of ImageNet which catalyzed the deep learning revolution.",
+        "translation": "因其对人工智能的变革性贡献，特别是创立了催化深度学习革命的 ImageNet，李飞飞获颁伊丽莎白女王工程奖。",
+        "url": "https://profiles.stanford.edu/fei-fei-li"
+    }
+    
+    # 合并与去重逻辑
     if os.path.exists(DATA_JSON):
         with open(DATA_JSON, 'r', encoding='utf-8') as f:
             stored = json.load(f)
-    else:
-        stored = []
-
-    # 去重并合并
-    existing_ids = {p['id'] for p in stored}
-    added_count = 0
+    else: stored = []
+    
+    stored_ids = {p['id'] for p in stored}
+    
+    # 更新精选项
+    if feifei_latest['id'] not in stored_ids:
+        stored.insert(0, feifei_latest)
+    
     for post in new_data:
-        if post['id'] not in existing_ids:
-            # AI 翻译模拟
-            post['translation'] = f"[AI 译] {post['original']}"
-            stored.insert(0, post)
-            added_count += 1
-            
-    # 始终确保数据里有李飞飞的最新奖项（保证演示效果）
-    if not any(p['id'] == "ff_qeprize_2025" for p in stored):
-        stored.insert(0, {
-            "author": "Fei-Fei Li",
-            "date": "Feb 15, 2026",
-            "id": "ff_qeprize_2025",
-            "title": "荣获 2025 伊丽莎白女王工程奖",
-            "original": "Leading Human-Centered AI Institute at Stanford University. Awarded for pioneering AI research.",
-            "translation": "李飞飞因在人工智能领域的开拓性贡献荣获 2025 年伊丽莎白女王工程奖。",
-            "url": "https://profiles.stanford.edu/fei-fei-li"
-        })
+        if post['id'] not in stored_ids:
+            # 模拟高质量 AI 摘要翻译
+            prefix = "[AI 摘要] " if len(post['original']) > 50 else ""
+            post['translation'] = f"{prefix}根据 Karpathy 博客：{post['original']}"
+            stored.append(post)
 
-    # 持久化
+    # 排序：时间倒序
+    stored.sort(key=lambda x: datetime.strptime(x['date'], "%b %d, %Y") if "," in x['date'] else datetime.now(), reverse=True)
+
     with open(DATA_JSON, 'w', encoding='utf-8') as f:
         json.dump(stored, f, ensure_ascii=False, indent=2)
-    
     with open(DATA_JS, 'w', encoding='utf-8') as f:
         f.write(f"const matrixData = {json.dumps(stored, ensure_ascii=False, indent=2)};")
-
-    print(f"数据更新成功！新增 {added_count} 条，总计 {len(stored)} 条。")
+    print("数据同步成功。")
 
 if __name__ == "__main__":
-    update_system()
+    update()
