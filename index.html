@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karpathy 思想库 | Karpathy Intelligence Hub</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            background-color: #ffffff;
+            width: 100%;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        h1 { margin: 0; font-size: 24px; color: #1c1e21; }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+        }
+        .search-box {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        #searchInput:focus {
+            border-color: #007bff;
+        }
+        .filters {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            background-color: #e4e6eb;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .post-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .star-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ddd;
+            user-select: none;
+            transition: color 0.3s;
+        }
+        .star-btn.active {
+            color: #f1c40f;
+        }
+        .post-date {
+            font-size: 0.85em;
+            color: #65676b;
+            margin-bottom: 10px;
+        }
+        .content-en {
+            font-size: 1.1em;
+            line-height: 1.5;
+            color: #1c1e21;
+            margin-bottom: 15px;
+            border-left: 4px solid #007bff;
+            padding-left: 15px;
+        }
+        .content-zh {
+            font-size: 1.05em;
+            line-height: 1.6;
+            color: #4b4f56;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .media img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .category-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            background: #e7f3ff;
+            color: #1877f2;
+            padding: 2px 10px;
+            border-radius: 10px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Karpathy 思想库</h1>
+        <p>搜集、翻译与存档 Andrej Karpathy 的见解</p>
+    </header>
+    <div class="container">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="搜索关键词（如 Tesla, RNN, 编程...）" oninput="handleSearch()">
+        </div>
+        <div id="stats" style="text-align: center; color: #65676b; font-size: 0.9em; margin-bottom: 10px;">正在加载情报...</div>
+        <div class="filters" id="filters">
+            <button class="active" onclick="filterPosts('All')">全部</button>
+            <button onclick="filterPosts('Starred')">⭐ 收藏</button>
+            <button onclick="filterPosts('AI/Coding')">AI/编程</button>
+            <button onclick="filterPosts('Career')">职业/生活</button>
+        </div>
+        <div id="posts-container">
+            <!-- 动态加载内容 -->
+        </div>
+    </div>
+
+    <script>
+        // 将数据直接嵌入 JS 变量，解决本地跨域读取问题
+        const allPosts = [
+  {
+    "id": "blog_2011_cifar",
+    "date": "2011-04-27",
+    "category": "AI/Research",
+    "original": "CIFAR-10 is a popular dataset for testing out Computer Vision Deep Learning methods. But what is the human baseline? I spent hours manually classifying images to find out.",
+    "translation": "CIFAR-10 是测试计算机视觉深度学习方法的常用数据集。但人类的基准线在哪里？我花了几个小时手动对图像进行分类以找出答案。",
+    "media": []
+  },
+  {
+    "id": "blog_2012_state",
+    "date": "2012-10-22",
+    "category": "AI/Research",
+    "original": "A depressing look at the state of Computer Vision Research and AI in general. For those who like to think that AI is anywhere close, we are really, really far away.",
+    "translation": "对计算机视觉研究和通用人工智能现状的一次令人沮丧的观察。对于那些认为 AI 已经近在咫尺的人来说，实际上我们还离得非常、非常远。",
+    "media": []
+  },
+  {
+    "id": "blog_2015_rnn",
+    "date": "2015-05-21",
+    "category": "AI/Theory",
+    "original": "The Unreasonable Effectiveness of Recurrent Neural Networks. We'll train RNNs to write poetry, latex math and code. They learn to represent complex structures from scratch.",
+    "translation": "循环神经网络 (RNN) 不合理的有效性。我们将训练 RNN 来写诗、写 LaTeX 数学公式和代码。它们学会了从零开始表示复杂的结构。",
+    "media": []
+  },
+  {
+    "id": "1547332300186066944",
+    "date": "2022-07-13",
+    "category": "Career",
+    "original": "It’s been a great pleasure to help Tesla towards its goals over the last 5 years and a difficult decision to part ways. In that time, Autopilot graduated from lane keeping to city streets and I look forward to seeing the exceptionally strong Autopilot team continue that momentum.",
+    "translation": "在过去的5年里，能帮助特斯拉实现其目标是我的荣幸，离开是一个艰难的决定。在这段时间里，Autopilot 从车道保持进化到了城市街道，我期待看到实力超群的 Autopilot 团队继续保持这一势头。",
+    "media": []
+  },
+  {
+    "id": "1617979122625712128",
+    "date": "2023-01-24",
+    "category": "AI/Coding",
+    "original": "The hottest new programming language is English.",
+    "translation": "目前最热门的新编程语言是英语。",
+    "media": []
+  },
+  {
+    "id": "1886192184808149383",
+    "date": "2025-02-02",
+    "category": "AI/Coding",
+    "original": "There's a new kind of coding I call \"vibe coding\", where you fully give in to the vibes, embrace exponentials, and forget that the code even exists. It's possible because the LLMs (e.g. Cursor Composer w Sonnet) are getting too good.",
+    "translation": "有一种我称之为“氛围编程” (Vibe Coding) 的新型编程方式：在这种模式下，你完全顺应“感觉”，拥抱指数级增长，甚至忘记了代码的存在。这之所以成为可能，是因为大语言模型（例如带有 Sonnet 的 Cursor Composer）正变得极其强大。",
+    "media": []
+  }
+];
+
+        function init() {
+            // 按日期排序（从晚到早）
+            allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+            const count = allPosts.length;
+            document.getElementById('stats').innerText = `已搜集情报：${count} 条 | 🚀 系统运行正常`;
+            renderPosts(allPosts);
+        }
+
+        function renderPosts(posts) {
+            const container = document.getElementById('posts-container');
+            container.innerHTML = '';
+            const starredIds = JSON.parse(localStorage.getItem('karpathy_starred') || '[]');
+            
+            posts.forEach(post => {
+                const isStarred = starredIds.includes(post.id);
+                const card = document.createElement('div');
+                card.className = 'post-card';
+                card.innerHTML = `
+                    <div class="star-btn ${isStarred ? 'active' : ''}" onclick="toggleStar('${post.id}')">★</div>
+                    <div class="post-date">
+                        ${post.date} 
+                        <span class="category-tag">${post.category}</span>
+                    </div>
+                    <div class="content-en">${post.original}</div>
+                    <div class="content-zh">${post.translation}</div>
+                    <div class="media">
+                        ${post.media.map(src => `<img src="${src}">`).join('')}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function toggleStar(id) {
+            let starredIds = JSON.parse(localStorage.getItem('karpathy_starred') || '[]');
+            if (starredIds.includes(id)) {
+                starredIds = starredIds.filter(sid => sid !== id);
+            } else {
+                starredIds.push(id);
+            }
+            localStorage.setItem('karpathy_starred', JSON.stringify(starredIds));
+            // 重新渲染以更新星星颜色
+            handleSearch(); // 虽然不是搜索，但它会根据当前输入重新跑一遍过滤和渲染
+        }
+
+        function filterPosts(category) {
+            // 更新按钮样式
+            const buttons = document.querySelectorAll('#filters button');
+            buttons.forEach(btn => {
+                const btnText = btn.innerText;
+                const targetText = category === 'All' ? '全部' : (category === 'Starred' ? '⭐ 收藏' : category);
+                btn.classList.toggle('active', btnText === targetText);
+            });
+            
+            if (category === 'All') {
+                renderPosts(allPosts);
+            } else if (category === 'Starred') {
+                const starredIds = JSON.parse(localStorage.getItem('karpathy_starred') || '[]');
+                renderPosts(allPosts.filter(p => starredIds.includes(p.id)));
+            } else {
+                renderPosts(allPosts.filter(p => p.category === category));
+            }
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allPosts.filter(post => 
+                post.original.toLowerCase().includes(query) || 
+                post.translation.toLowerCase().includes(query) ||
+                post.category.toLowerCase().includes(query)
+            );
+            renderPosts(filtered);
+        }
+
+        init();
+    </script>
+</body>
+</html>

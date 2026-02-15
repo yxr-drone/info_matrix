@@ -1,0 +1,50 @@
+[
+  {
+    "id": "blog_2011_cifar",
+    "date": "2011-04-27",
+    "category": "AI/Research",
+    "original": "CIFAR-10 is a popular dataset for testing out Computer Vision Deep Learning methods. But what is the human baseline? I spent hours manually classifying images to find out.",
+    "translation": "CIFAR-10 是测试计算机视觉深度学习方法的常用数据集。但人类的基准线在哪里？我花了几个小时手动对图像进行分类以找出答案。",
+    "media": []
+  },
+  {
+    "id": "blog_2012_state",
+    "date": "2012-10-22",
+    "category": "AI/Research",
+    "original": "A depressing look at the state of Computer Vision Research and AI in general. For those who like to think that AI is anywhere close, we are really, really far away.",
+    "translation": "对计算机视觉研究和通用人工智能现状的一次令人沮丧的观察。对于那些认为 AI 已经近在咫尺的人来说，实际上我们还离得非常、非常远。",
+    "media": []
+  },
+  {
+    "id": "blog_2015_rnn",
+    "date": "2015-05-21",
+    "category": "AI/Theory",
+    "original": "The Unreasonable Effectiveness of Recurrent Neural Networks. We'll train RNNs to write poetry, latex math and code. They learn to represent complex structures from scratch.",
+    "translation": "循环神经网络 (RNN) 不合理的有效性。我们将训练 RNN 来写诗、写 LaTeX 数学公式和代码。它们学会了从零开始表示复杂的结构。",
+    "media": []
+  },
+  {
+    "id": "1547332300186066944",
+    "date": "2022-07-13",
+    "category": "Career",
+    "original": "It’s been a great pleasure to help Tesla towards its goals over the last 5 years and a difficult decision to part ways. In that time, Autopilot graduated from lane keeping to city streets and I look forward to seeing the exceptionally strong Autopilot team continue that momentum.",
+    "translation": "在过去的5年里，能帮助特斯拉实现其目标是我的荣幸，离开是一个艰难的决定。在这段时间里，Autopilot 从车道保持进化到了城市街道，我期待看到实力超群的 Autopilot 团队继续保持这一势头。",
+    "media": []
+  },
+  {
+    "id": "1617979122625712128",
+    "date": "2023-01-24",
+    "category": "AI/Coding",
+    "original": "The hottest new programming language is English.",
+    "translation": "目前最热门的新编程语言是英语。",
+    "media": []
+  },
+  {
+    "id": "1886192184808149383",
+    "date": "2025-02-02",
+    "category": "AI/Coding",
+    "original": "There's a new kind of coding I call \"vibe coding\", where you fully give in to the vibes, embrace exponentials, and forget that the code even exists. It's possible because the LLMs (e.g. Cursor Composer w Sonnet) are getting too good.",
+    "translation": "有一种我称之为“氛围编程” (Vibe Coding) 的新型编程方式：在这种模式下，你完全顺应“感觉”，拥抱指数级增长，甚至忘记了代码的存在。这之所以成为可能，是因为大语言模型（例如带有 Sonnet 的 Cursor Composer）正变得极其强大。",
+    "media": []
+  }
+]
