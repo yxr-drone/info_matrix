@@ -12,7 +12,22 @@
             --text-main: #1e293b;
             --text-sub: #64748b;
         }
-        body {
+        /* 新增 Tag 样式 */
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #e2e8f0;
+            color: #475569;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tag:hover { background: var(--primary-color); color: white; }
+        .tag.active { background: var(--primary-color); color: white; }
+        
+        .sidebar {
             font-family: 'Inter', -apple-system, sans-serif;
             background-color: var(--bg-color);
             margin: 0;
@@ -124,27 +139,35 @@
 
         let currentAuthor = 'All';
 
+        let currentSort = 'latest';
+        let activeTag = null;
+
         function render(data) {
             const feed = document.getElementById('matrix-feed');
             
-            // 执行前端排序逻辑
-            let sortedData = [...data];
+            // 综合过滤：人物 + 标签
+            let filteredData = data.filter(d => {
+                const authorMatch = (currentAuthor === 'All' || d.author === currentAuthor);
+                const tagMatch = (!activeTag || (d.tags && d.tags.includes(activeTag)));
+                return authorMatch && tagMatch;
+            });
+
+            // 综合排序
             const sortMode = document.querySelector('.sort-controls .active')?.id || 'sort-latest';
-            
             if (sortMode === 'sort-latest') {
-                sortedData.sort((a, b) => new Date(b.date) - new Date(a.date));
+                filteredData.sort((a, b) => new Date(b.date) - new Date(a.date));
             } else if (sortMode === 'sort-oldest') {
-                sortedData.sort((a, b) => new Date(a.date) - new Date(b.date));
-            } else if (sortValue === 'sort-hot') {
-                // 暂时以ID长度或随机演示热度，后续爬虫抓取Like数后替换
-                sortedData.sort((a, b) => (b.original.length) - (a.original.length));
+                filteredData.sort((a, b) => new Date(a.date) - new Date(b.date));
             }
 
-            feed.innerHTML = sortedData.map(item => `
+            feed.innerHTML = filteredData.map(item => `
                 <div class="card">
                     <div class="card-header">
                         <span class="author-tag">${item.author}</span>
-                        <span class="date-tag">${item.date}</span>
+                        <div>
+                            ${item.tags ? item.tags.map(t => `<span class="tag" onclick="filterByTag('${t}')">${t}</span>`).join('') : ''}
+                            <span class="date-tag">${item.date}</span>
+                        </div>
                     </div>
                     ${item.title ? `<div class="title">${item.title}</div>` : ''}
                     <div class="lang-block">
@@ -168,6 +191,12 @@
                 btn.classList.toggle('active', btn.id === `sort-${mode}`);
             });
             switchAuthor(currentAuthor); // 重新触发渲染
+        }
+
+        function filterByTag(tag) {
+            activeTag = (activeTag === tag) ? null : tag;
+            // 更新 UI 样式（后续可加到 render 中）
+            switchAuthor(currentAuthor);
         }
 
         function switchAuthor(author) {
