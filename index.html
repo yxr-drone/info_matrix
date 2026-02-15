@@ -104,6 +104,11 @@
     <div class="main-content">
         <header>
             <div id="author-title">📂 全部情报流</div>
+            <div class="sort-controls" style="display: flex; gap: 10px;">
+                <button id="sort-latest" class="active" onclick="setSort('latest')">最新发布</button>
+                <button id="sort-oldest" onclick="setSort('oldest')">最早追溯</button>
+                <button id="sort-hot" onclick="setSort('hot')">🔥 热度</button>
+            </div>
             <input type="text" class="search-bar" placeholder="搜索全球大牛的智慧..." oninput="search(this.value)">
         </header>
         
@@ -121,7 +126,21 @@
 
         function render(data) {
             const feed = document.getElementById('matrix-feed');
-            feed.innerHTML = data.map(item => `
+            
+            // 执行前端排序逻辑
+            let sortedData = [...data];
+            const sortMode = document.querySelector('.sort-controls .active')?.id || 'sort-latest';
+            
+            if (sortMode === 'sort-latest') {
+                sortedData.sort((a, b) => new Date(b.date) - new Date(a.date));
+            } else if (sortMode === 'sort-oldest') {
+                sortedData.sort((a, b) => new Date(a.date) - new Date(b.date));
+            } else if (sortValue === 'sort-hot') {
+                // 暂时以ID长度或随机演示热度，后续爬虫抓取Like数后替换
+                sortedData.sort((a, b) => (b.original.length) - (a.original.length));
+            }
+
+            feed.innerHTML = sortedData.map(item => `
                 <div class="card">
                     <div class="card-header">
                         <span class="author-tag">${item.author}</span>
@@ -132,15 +151,23 @@
                         <div class="lang-en">${item.original}</div>
                         <div class="lang-zh">${item.translation}</div>
                     </div>
+                    ${item.media && item.media.length > 0 ? `
                     <div class="media-container">
                         ${item.media.map(m => `<img src="${m}" onerror="this.style.display='none'">`).join('')}
-                    </div>
+                    </div>` : ''}
                     <div class="links">
                         <a href="${item.url}" target="_blank">🔗 访问原文</a>
-                        ${item.links.map(l => `<a href="${l}" target="_blank">📄 相关文档</a>`).join('')}
+                        ${item.links ? item.links.map(l => `<a href="${l}" target="_blank">📄 相关文档</a>`).join('') : ''}
                     </div>
                 </div>
             `).join('');
+        }
+
+        function setSort(mode) {
+            document.querySelectorAll('.sort-controls button').forEach(btn => {
+                btn.classList.toggle('active', btn.id === `sort-${mode}`);
+            });
+            switchAuthor(currentAuthor); // 重新触发渲染
         }
 
         function switchAuthor(author) {
