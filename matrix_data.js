@@ -1,86 +1,257 @@
 const matrixData = [
   {
-    "id": "2026_microgpt_full",
-    "author": "Andrej Karpathy",
-    "date": "2026-02-12",
-    "tags": ["Coding", "GPT", "Education"],
-    "title": "microgpt: My 200-line Art Project",
-    "url": "https://karpathy.github.io/2026/02/12/microgpt/",
-    "original": "This is a single file of 200 lines of pure Python with no dependencies that trains and inferences a GPT. It contains all algorithmic content: tokenizer, autograd, architecture, Adam, and training loop. I think it is beautiful 🥹.",
-    "translation": "这是一个由200行纯Python代码组成的单文件艺术项目，无依赖实现GPT训练与推理。它包含所有算法核心：分词器、自动求导、架构、Adam及训练循环。我觉得它非常美丽 🥹。",
-    "media": ["https://karpathy.github.io/assets/microgpt.png"],
-    "links": ["https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95"]
-  },
-  {
-    "id": "feifei_2025_vision",
     "author": "Fei-Fei Li",
-    "date": "2025-11-15",
-    "tags": ["Vision", "Spatial_Intelligence", "Philosophy"],
-    "title": "A Human-Centered AI Vision",
+    "date": "Feb 15, 2026",
+    "id": "ff_latest_profile",
+    "title": "Stanford Profile Update",
+    "original": "Leading Human-Centered AI Institute at Stanford University.",
     "url": "https://profiles.stanford.edu/fei-fei-li",
-    "original": "Artificial Intelligence is no longer just a technical pursuit; it is a human one. Our challenge is to build machines that perceive the world as humans do, while ensuring they serve human values. Spatial Intelligence is the next frontier.",
-    "translation": "人工智能不再仅仅是一项技术追求，而是一项属于人类的追求。我们的挑战是制造出能像人类一样感知世界的机器，并确保它们服务于人类价值观。空间智能是下一个前沿。",
-    "media": ["https://hai.stanford.edu/sites/default/files/styles/hero_image_large/public/2023-10/Fei-Fei%20Li%20Book%20Cover.jpg"],
-    "links": []
+    "translation": "Leading Human-Centered AI Institute at Stanford University."
   },
   {
-    "id": "karpathy_vibe_coding",
     "author": "Andrej Karpathy",
-    "date": "2025-02-02",
-    "tags": ["Coding", "LLM", "Future"],
-    "title": "The Era of Vibe Coding",
-    "url": "https://x.com/karpathy/status/1886192184808149383",
-    "original": "There's a new kind of coding I call \"vibe coding\", where you fully give in to the vibes, embrace exponentials, and forget that the code even exists. It's possible because the LLMs (e.g. Cursor Composer w Sonnet) are getting too good.",
-    "translation": "有一种我称之为“氛围编程”的新型编程模式：你完全顺应“感觉”，拥抱指数级增长，甚至忘记了代码的存在。这之所以成为可能，是因为LLM（如配备Sonnet的Cursor Composer）正变得极其强大。",
-    "media": [],
-    "links": []
+    "date": "",
+    "id": "ak_https:__twitter.com_karpathy",
+    "title": "karpathy",
+    "original": "",
+    "url": "https://karpathy.github.iohttps://twitter.com/karpathy",
+    "translation": ""
   },
   {
-    "id": "feifei_spatial_intel",
+    "author": "Andrej Karpathy",
+    "date": "",
+    "id": "ak_https:__github.com_karpathy",
+    "title": "karpathy",
+    "original": "",
+    "url": "https://karpathy.github.iohttps://github.com/karpathy",
+    "translation": ""
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Apr 27, 2011",
+    "id": "ak_2011_04_27_manually-classifying-cifar10",
+    "title": "Lessons learned from manually classifying CIFAR-10",
+    "original": "CIFAR-10 is a popular dataset small dataset for testing out Computer Vision Deep Learning learning methods. We're seeing a lot of improvements. But what is the human baseline?",
+    "url": "https://karpathy.github.io/2011/04/27/manually-classifying-cifar10/",
+    "translation": "CIFAR-10 is a popular dataset small dataset for testing out Computer Vision Deep Learning learning methods. We're seeing a lot of improvements. But what is the human baseline?"
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Oct 22, 2012",
+    "id": "ak_2012_10_22_state-of-computer-vision",
+    "title": "The state of Computer Vision and AI: we are really, really far away.",
+    "original": "A depressing look at the state of Computer Vision Research and AI in general. For those who like to think that AI is anywhere close.",
+    "url": "https://karpathy.github.io/2012/10/22/state-of-computer-vision/",
+    "translation": "A depressing look at the state of Computer Vision Research and AI in general. For those who like to think that AI is anywhere close."
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Nov 23, 2013",
+    "id": "ak_2013_11_23_chrome-extension-programming",
+    "title": "Chrome Extension Programming: Illustrating a Basic Survival Skill with a Twitter Case Study",
+    "original": "I illustrate a very valuable skill (Chrome Extension Programming) using a Twitter Case study. We will give Twitter a face lift, get it to refresh new tweets automatically, and highlight tweets from people who rarely tweet. All with a few lines of Javascript!",
+    "url": "https://karpathy.github.io/2013/11/23/chrome-extension-programming/",
+    "translation": "I illustrate a very valuable skill (Chrome Extension Programming) using a Twitter Case study. We will give Twitter a face lift, get it to refresh new tweets automatically, and highlight tweets from people who rarely tweet. All with a few lines of Javascript!"
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Nov 27, 2013",
+    "id": "ak_2013_11_27_quantifying-hacker-news",
+    "title": "Quantifying Hacker News with 50 days of data",
+    "original": "I scraped Hacker News Front Page and New Page every minute for 50 days and analyzed the results. How do stories rise and fall on Hacker News? What makes a successful post? Find out in this post :)",
+    "url": "https://karpathy.github.io/2013/11/27/quantifying-hacker-news/",
+    "translation": "I scraped Hacker News Front Page and New Page every minute for 50 days and analyzed the results. How do stories rise and fall on Hacker News? What makes a successful post? Find out in this post :)"
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Apr 26, 2014",
+    "id": "ak_2014_04_26_datascience-weekly-interview",
+    "title": "Interview with Data Science Weekly on Neural Nets and ConvNetJS",
+    "original": "I gave a (long) interview about my background and perspectives on neural nets.",
+    "url": "https://karpathy.github.io/2014/04/26/datascience-weekly-interview/",
+    "translation": "I gave a (long) interview about my background and perspectives on neural nets."
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Jul 1, 2014",
+    "id": "ak_2014_07_01_switching-to-jekyll",
+    "title": "Switching Blog from Wordpress to Jekyll",
+    "original": "I can't believe I lasted this long on Wordpress. I am switching permanently to Jekyll for hosting my blog, and so should you :) Details inside.",
+    "url": "https://karpathy.github.io/2014/07/01/switching-to-jekyll/",
+    "translation": "I can't believe I lasted this long on Wordpress. I am switching permanently to Jekyll for hosting my blog, and so should you :) Details inside."
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Jul 2, 2014",
+    "id": "ak_2014_07_02_visualizing-top-tweeps-with-t-sne-in-Javascript",
+    "title": "Visualizing Top Tweeps with t-SNE, in Javascript",
+    "original": "A writeup of a recent mini-project: I scraped tweets of the top 500 Twitter accounts and used t-SNE to visualize the accounts so that people who tweet similar things are nearby. My final Javascript implementation of t-SNE is released on Github as tsnejs.",
+    "url": "https://karpathy.github.io/2014/07/02/visualizing-top-tweeps-with-t-sne-in-Javascript/",
+    "translation": "A writeup of a recent mini-project: I scraped tweets of the top 500 Twitter accounts and used t-SNE to visualize the accounts so that people who tweet similar things are nearby. My final Javascript implementation of t-SNE is released on Github as tsnejs."
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Jul 3, 2014",
+    "id": "ak_2014_07_03_feature-learning-escapades",
+    "title": "Feature Learning Escapades",
+    "original": "Some reflections on the last two years of my research: The Quest for Unsupervised Feature Learning algorithms for visual data. Where it was, where it is, and where it's going. Maybe.",
+    "url": "https://karpathy.github.io/2014/07/03/feature-learning-escapades/",
+    "translation": "Some reflections on the last two years of my research: The Quest for Unsupervised Feature Learning algorithms for visual data. Where it was, where it is, and where it's going. Maybe."
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Aug 3, 2014",
+    "id": "ak_2014_08_03_quantifying-productivity",
+    "title": "Quantifying Productivity",
+    "original": "Describing a new pet project that tracks active windows and keystroke frequencies over the duration of a day (on Ubuntu/OSX) and creates pretty HTML visualizations of the data. This allows me to gain nice insights into my productivity. Code on Github.",
+    "url": "https://karpathy.github.io/2014/08/03/quantifying-productivity/",
+    "translation": "Describing a new pet project that tracks active windows and keystroke frequencies over the duration of a day (on Ubuntu/OSX) and creates pretty HTML visualizations of the data. This allows me to gain nice insights into my productivity. Code on Github."
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Sep 2, 2014",
+    "id": "ak_2014_09_02_what-i-learned-from-competing-against-a-convnet-on-imagenet",
+    "title": "What I learned from competing against a ConvNet on ImageNet",
+    "original": "The latest state of the art Image Classification networks have only 6.7% Hit@5 error on ILSVRC 2014 classification task. How do humans compare?",
+    "url": "https://karpathy.github.io/2014/09/02/what-i-learned-from-competing-against-a-convnet-on-imagenet/",
+    "translation": "The latest state of the art Image Classification networks have only 6.7% Hit@5 error on ILSVRC 2014 classification task. How do humans compare?"
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Mar 30, 2015",
+    "id": "ak_2015_03_30_breaking-convnets",
+    "title": "Breaking Linear Classifiers on ImageNet",
+    "original": "There have been a few recent papers that fool ConvNets by taking a correctly classified image and perturbing it in an imperceptible way to produce an image that is misclassified. In this post I show that ConvNets are an overkill: Simple linear classifiers are in fact susceptible to the same fooling strategy.",
+    "url": "https://karpathy.github.io/2015/03/30/breaking-convnets/",
+    "translation": "There have been a few recent papers that fool ConvNets by taking a correctly classified image and perturbing it in an imperceptible way to produce an image that is misclassified. In this post I show that ConvNets are an overkill: Simple linear classifiers are in fact susceptible to the same fooling strategy."
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "May 21, 2015",
+    "id": "ak_2015_05_21_rnn-effectiveness",
+    "title": "The Unreasonable Effectiveness of Recurrent Neural Networks",
+    "original": "We'll train and sample from character-level RNN language models that learn to write poetry, latex math and code. We'll also analyze the models and get hints of future research directions.",
+    "url": "https://karpathy.github.io/2015/05/21/rnn-effectiveness/",
+    "translation": "We'll train and sample from character-level RNN language models that learn to write poetry, latex math and code. We'll also analyze the models and get hints of future research directions."
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Oct 25, 2015",
+    "id": "ak_2015_10_25_selfie",
+    "title": "What a Deep Neural Network thinks about your #selfie",
+    "original": "We will look at Convolutional Neural Networks, with a fun example of training them to classify #selfies as good/bad based on a scraped dataset of 2 million selfies.",
+    "url": "https://karpathy.github.io/2015/10/25/selfie/",
+    "translation": "We will look at Convolutional Neural Networks, with a fun example of training them to classify #selfies as good/bad based on a scraped dataset of 2 million selfies."
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Nov 14, 2015",
+    "id": "ak_2015_11_14_ai",
+    "title": "Short Story on AI: A Cognitive Discontinuity.",
+    "original": "The first part of a short story collection that has been on my mind for a long while. Exciting! :)",
+    "url": "https://karpathy.github.io/2015/11/14/ai/",
+    "translation": "The first part of a short story collection that has been on my mind for a long while. Exciting! :)"
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "May 31, 2016",
+    "id": "ak_2016_05_31_rl",
+    "title": "Deep Reinforcement Learning: Pong from Pixels",
+    "original": "I'll discuss the core ideas, pros and cons of policy gradients, a standard approach to the rapidly growing and exciting area of deep reinforcement learning. As a running example we'll learn to play ATARI 2600 Pong from raw pixels.",
+    "url": "https://karpathy.github.io/2016/05/31/rl/",
+    "translation": "I'll discuss the core ideas, pros and cons of policy gradients, a standard approach to the rapidly growing and exciting area of deep reinforcement learning. As a running example we'll learn to play ATARI 2600 Pong from raw pixels."
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Sep 7, 2016",
+    "id": "ak_2016_09_07_phd",
+    "title": "A Survival Guide to a PhD",
+    "original": "A collection of tips/tricks for navigating the PhD experience.",
+    "url": "https://karpathy.github.io/2016/09/07/phd/",
+    "translation": "A collection of tips/tricks for navigating the PhD experience."
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Jan 20, 2018",
+    "id": "ak_2018_01_20_medium",
+    "title": "(started posting on Medium instead)",
+    "original": "Yes I'm still around but, I've started posting on Medium instead of here.",
+    "url": "https://karpathy.github.io/2018/01/20/medium/",
+    "translation": "Yes I'm still around but, I've started posting on Medium instead of here."
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Apr 25, 2019",
+    "id": "ak_2019_04_25_recipe",
+    "title": "A Recipe for Training Neural Networks",
+    "original": "A collection of practical advice for the process of achieving strong results with neural networks.",
+    "url": "https://karpathy.github.io/2019/04/25/recipe/",
+    "translation": "A collection of practical advice for the process of achieving strong results with neural networks."
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Jun 11, 2020",
+    "id": "ak_2020_06_11_biohacking-lite",
+    "title": "Biohacking Lite",
+    "original": "Dipping toes into biochemistry, energy metabolism and running some biohacking lite experiments.",
+    "url": "https://karpathy.github.io/2020/06/11/biohacking-lite/",
+    "translation": "Dipping toes into biochemistry, energy metabolism and running some biohacking lite experiments."
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Mar 27, 2021",
+    "id": "ak_2021_03_27_forward-pass",
+    "title": "Short Story on AI: Forward Pass",
+    "original": "A story of an existential crisis under the hood of a humble forward pass.",
+    "url": "https://karpathy.github.io/2021/03/27/forward-pass/",
+    "translation": "A story of an existential crisis under the hood of a humble forward pass."
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Jun 21, 2021",
+    "id": "ak_2021_06_21_blockchain",
+    "title": "A from-scratch tour of Bitcoin in Python",
+    "original": "We are going to create, digitally sign, and broadcast a Bitcoin transaction in pure Python, from scratch, and with zero dependencies",
+    "url": "https://karpathy.github.io/2021/06/21/blockchain/",
+    "translation": "We are going to create, digitally sign, and broadcast a Bitcoin transaction in pure Python, from scratch, and with zero dependencies"
+  },
+  {
+    "author": "Andrej Karpathy",
+    "date": "Mar 14, 2022",
+    "id": "ak_2022_03_14_lecun1989",
+    "title": "Deep Neural Nets: 33 years ago and 33 years from now",
+    "original": "To my knowledge, LeCun et al. 1989 is the earliest real-world application of a neural net trained end-to-end with backpropagation. Can we improve on it using 33 years of progress in deep learning? What does 1989 deep learning look like to someone in 2022, and what will today's deep learning look like to someone in 2055?",
+    "url": "https://karpathy.github.io/2022/03/14/lecun1989/",
+    "translation": "To my knowledge, LeCun et al. 1989 is the earliest real-world application of a neural net trained end-to-end with backpropagation. Can we improve on it using 33 years of progress in deep learning? What does 1989 deep learning look like to someone in 2022, and what will today's deep learning look like to someone in 2055?"
+  },
+  {
     "author": "Fei-Fei Li",
-    "date": "2024-04-18",
-    "tags": ["Spatial_Intelligence", "Robotics", "Vision"],
-    "title": "Spatial Intelligence: Everything we see is moving",
-    "url": "https://www.ted.com/talks/fei_fei_li_with_spatial_intelligence_ai_will_understand_the_real_world",
-    "original": "If we want to build AI that can act in the world, it must understand space. Not just identifying objects, but understanding their relationships and how to interact with them physically. This is what we call Spatial Intelligence.",
-    "translation": "如果我们想要构建能在现实世界中行动的AI，它必须理解空间。不仅仅是识别物体，还要理解它们之间的关系以及如何进行物理交互。这就是我们所说的‘空间智能’。",
-    "media": ["https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/1c26f0c9-6663-4482-8418-c2b6f17e0e71/FeiFeiLi_2024-embed.jpg"],
-    "links": []
+    "date": "Feb 15, 2026",
+    "id": "ff_qeprize_2025",
+    "title": "获颁 2025 伊丽莎白女王工程奖",
+    "original": "Dr. Fei-Fei Li is a laureate of the Queen Elizabeth Prize for Engineering (2025) for her pioneering work in AI and ImageNet.",
+    "translation": "李飞飞教授因其在人工智能和 ImageNet 领域的开拓性贡献，荣获 2025 年伊丽莎白女王工程奖。这是工程界的最高荣誉之一。",
+    "url": "https://profiles.stanford.edu/fei-fei-li",
+    "links": [
+      "https://qeprize.org/"
+    ],
+    "media": [
+      "https://hai.stanford.edu/sites/default/files/styles/hero_image_large/public/2023-10/Fei-Fei%20Li%20Book%20Cover.jpg"
+    ]
   },
   {
-    "id": "karpathy_llm_os",
     "author": "Andrej Karpathy",
-    "date": "2023-11-15",
-    "tags": ["LLM", "Architecture", "Operating_System"],
-    "title": "LLM as an Operating System (LLM OS)",
-    "url": "https://x.com/karpathy/status/1723140511797453141",
-    "original": "I often think of LLMs as the kernel of a new kind of operating system. It has the CPU (the LLM), memory (context window), and peripherals (tools like browsers or code interpreters). The OS of the future isn't built of files, but of flow.",
-    "translation": "我经常将LLM视为一种新型操作系统的内核。它拥有CPU（LLM）、内存（上下文窗口）以及外设（浏览器或代码解释器等工具）。未来的操作系统不是由文件构建的，而是由流程构建的。",
-    "media": ["https://pbs.twimg.com/media/F-nvWpGW0AAE6q_.jpg"],
-    "links": []
-  },
-  {
-    "id": "feifei_human_centered",
-    "author": "Fei-Fei Li",
-    "date": "2023-10-25",
-    "tags": ["Philosophy", "Human-Centered", "Ethics"],
-    "title": "Why we need Human-Centered AI",
-    "url": "https://hai.stanford.edu/news/why-we-need-human-centered-ai",
-    "original": "We need to ensure that AI is designed and implemented to enhance humanity, rather than diminish it. This requires a multidisciplinary approach involving ethics, social science, and technology.",
-    "translation": "我们需要确保AI的设计和实施是为了增强人类能力，而不是削弱它。这需要涉及伦理、社会科学和技术的跨学科方法。",
-    "media": [],
-    "links": []
-  },
-  {
-    "id": "karpathy_grad_descent",
-    "author": "Andrej Karpathy",
-    "date": "2021-12-01",
-    "tags": ["Optimization", "Neural_Nets"],
-    "title": "The Beauty of Gradient Descent",
-    "url": "https://x.com/karpathy",
-    "original": "Gradient descent is the 'god algorithm'. You specify the loss, and the nature of the math finds the path. It's almost mystical how well it generalizes across diverse domains.",
-    "translation": "梯度下降是‘上帝算法’。你指定损失，数学的本质便会寻找路径。它在不同领域中表现出的泛化能力几乎带有某种神秘感。",
-    "media": [],
-    "links": []
+    "date": "Feb 12, 2026",
+    "id": "ak_2026_02_12_microgpt",
+    "title": "microgpt: 200 行代码的艺术项目",
+    "original": "It takes 200 lines of pure, dependency-free Python to train and inference GPT. I cannot make this any shorter.",
+    "translation": "Karpathy 发布了 microgpt：仅用 200 行纯 Python 代码（无依赖）实现了 GPT 的训练与推理。这展示了神经网络极简主义的极致美感。",
+    "url": "https://karpathy.github.io/2026/02/12/microgpt/",
+    "links": [
+      "https://karpathy.github.io/2026/02/12/microgpt/"
+    ],
+    "media": [
+      "https://karpathy.github.io/assets/microgpt.png"
+    ]
   }
 ];

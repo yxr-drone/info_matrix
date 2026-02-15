@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>情报矩阵 | Intelligence Matrix</title>
     <style>
         :root {
@@ -11,38 +11,37 @@
             --card-bg: #ffffff;
             --text-main: #1e293b;
             --text-sub: #64748b;
+            --border-color: #e2e8f0;
+            --accent-color: #f59e0b;
         }
-        /* 新增 Tag 样式 */
-        .tag {
-            display: inline-block;
-            padding: 2px 8px;
-            background: #e2e8f0;
-            color: #475569;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            margin-right: 5px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .tag:hover { background: var(--primary-color); color: white; }
-        .tag.active { background: var(--primary-color); color: white; }
         
-        .sidebar {
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+            --border-color: #334155;
+        }
+
+        body {
             font-family: 'Inter', -apple-system, sans-serif;
             background-color: var(--bg-color);
             margin: 0;
             display: flex;
             height: 100vh;
             overflow: hidden;
+            transition: background 0.3s;
         }
-        /* 侧边栏 */
+        
+        /* 侧边栏 - 桌面端 */
         .sidebar {
-            width: 260px;
+            width: 240px;
             background: #1e293b;
             color: white;
             padding: 20px;
             display: flex;
             flex-direction: column;
+            flex-shrink: 0;
         }
         .sidebar h2 { font-size: 1.2rem; margin-bottom: 30px; border-bottom: 1px solid #334155; padding-bottom: 15px; }
         .nav-item {
@@ -54,170 +53,213 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 0.95rem;
         }
         .nav-item:hover { background: #334155; }
         .nav-item.active { background: var(--primary-color); }
         
+        /* 移动端底部/顶部导航（仅移动端显示） */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 100;
+        }
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.7rem;
+            color: var(--text-sub);
+            gap: 4px;
+        }
+        .mobile-nav-item.active { color: var(--primary-color); }
+        .mobile-nav-item i { font-size: 1.2rem; }
+
         /* 主内容区 */
         .main-content {
             flex: 1;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
+            padding-bottom: 60px; /* 为移动端导航留白 */
         }
         header {
-            padding: 20px 40px;
-            background: white;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 15px 25px;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
-        .search-bar {
-            width: 400px;
-            padding: 10px 20px;
-            border: 1px solid #e2e8f0;
-            border-radius: 20px;
-            outline: none;
-        }
-        .feed { padding: 40px; max-width: 900px; margin: 0 auto; width: 100%; }
         
-        /* 情报卡片 */
+        .view-controls {
+            display: flex;
+            background: var(--bg-color);
+            padding: 3px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .view-btn {
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+        }
+        .view-btn.active {
+            background: var(--card-bg);
+            color: var(--primary-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .feed { padding: 20px; max-width: 800px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+        
+        /* 卡片设计优化 */
         .card {
             background: var(--card-bg);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
         }
-        .card:hover { transform: translateY(-2px); }
-        .card-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
-        .author-tag { font-weight: bold; color: var(--primary-color); }
-        .date-tag { color: var(--text-sub); font-size: 0.9rem; }
-        .title { font-size: 1.4rem; font-weight: 800; margin-bottom: 15px; color: var(--text-main); }
-        .lang-block { margin-bottom: 15px; line-height: 1.6; }
-        .lang-en { font-style: italic; color: var(--text-sub); border-left: 3px solid #e2e8f0; padding-left: 15px; margin-bottom: 10px; }
-        .lang-zh { color: var(--text-main); font-size: 1.1rem; }
-        .media-container img { width: 100%; border-radius: 12px; margin: 15px 0; border: 1px solid #eee; }
-        .links { margin-top: 15px; }
-        .links a { color: var(--primary-color); text-decoration: none; font-size: 0.9rem; margin-right: 15px; }
-        .links a:hover { text-decoration: underline; }
+        .author-tag { font-weight: 700; color: var(--primary-color); font-size: 0.85rem; }
+        .date-tag { color: var(--text-sub); font-size: 0.8rem; }
+        .title { font-size: 1.25rem; font-weight: 800; margin: 10px 0; color: var(--text-main); line-height: 1.3; }
+        .lang-en { font-style: italic; color: var(--text-sub); border-left: 3px solid var(--border-color); padding-left: 12px; margin-bottom: 10px; font-size: 0.95rem; }
+        .lang-zh { color: var(--text-main); font-size: 1.05rem; line-height: 1.5; }
+        .media-container img { width: 100%; border-radius: 8px; margin-top: 12px; }
+        
+        .bookmark-btn { cursor: pointer; font-size: 1.2rem; color: #ccc; }
+        .bookmark-btn.active { color: var(--accent-color); }
+
+        /* 响应式断点 */
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .mobile-nav { display: flex; }
+            header { padding: 10px 15px; }
+            #author-title { font-size: 1rem; }
+            .feed { padding: 10px; }
+            .card { padding: 15px; border-radius: 0; border-left: none; border-right: none; margin-bottom: 15px; }
+            .main-content { padding-bottom: 70px; }
+        }
     </style>
 </head>
 <body>
+    <!-- 桌面端侧边栏 -->
     <div class="sidebar">
-        <h2>情报矩阵 <span style="font-size: 0.7rem; opacity: 0.6;">v2.0</span></h2>
+        <h2>情报矩阵</h2>
         <div class="nav-item active" onclick="switchAuthor('All')">🌐 全部流</div>
-        <div class="nav-item" onclick="switchAuthor('Andrej Karpathy')">🧠 Andrej Karpathy</div>
-        <div class="nav-item" onclick="switchAuthor('Fei-Fei Li')">👁️ 李飞飞 (Fei-Fei Li)</div>
-        <div style="margin-top: auto; font-size: 0.8rem; opacity: 0.5;">
-            后台采集器: 运行中 (每10min)
-        </div>
+        <div class="nav-item" onclick="switchAuthor('Andrej Karpathy')">🧠 Karpathy</div>
+        <div class="nav-item" onclick="switchAuthor('Fei-Fei Li')">👁️ 李飞飞</div>
+        <div class="nav-item" onclick="switchAuthor('Bookmarks')">⭐ 收藏夹</div>
+    </div>
+    
+    <!-- 移动端底部导航 -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-item active" onclick="switchAuthor('All')"><span>🌐</span>全部</div>
+        <div class="mobile-nav-item" onclick="switchAuthor('Andrej Karpathy')"><span>🧠</span>AK</div>
+        <div class="mobile-nav-item" onclick="switchAuthor('Fei-Fei Li')"><span>👁️</span>李飞飞</div>
+        <div class="mobile-nav-item" onclick="switchAuthor('Bookmarks')"><span>⭐</span>收藏</div>
     </div>
     
     <div class="main-content">
         <header>
-            <div id="author-title">📂 全部情报流</div>
-            <div class="sort-controls" style="display: flex; gap: 10px;">
-                <button id="sort-latest" class="active" onclick="setSort('latest')">最新发布</button>
-                <button id="sort-oldest" onclick="setSort('oldest')">最早追溯</button>
-                <button id="sort-hot" onclick="setSort('hot')">🔥 热度</button>
+            <div id="author-title" style="font-weight: 800; color: var(--text-main);">全部情报</div>
+            <div class="view-controls">
+                <button id="view-dual" class="view-btn active" onclick="setViewMode('dual')">对照</button>
+                <button id="view-zh" class="view-btn" onclick="setViewMode('zh')">中</button>
+                <button id="view-en" class="view-btn" onclick="setViewMode('en')">英</button>
             </div>
-            <input type="text" class="search-bar" placeholder="搜索全球大牛的智慧..." oninput="search(this.value)">
+            <button onclick="toggleTheme()" style="background: none; border: none; font-size: 1.2rem; cursor: pointer;">🌓</button>
         </header>
         
-        <div class="feed" id="matrix-feed">
-            <!-- 动态加载内容 -->
-        </div>
+        <div class="feed" id="matrix-feed"></div>
     </div>
 
-    <!-- 引用独立数据源 -->
     <script src="matrix_data.js"></script>
     <script>
-        // ... 原有的 JS 逻辑，但删掉硬编码的 matrixData
-
         let currentAuthor = 'All';
+        let viewMode = 'dual'; 
+        let bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
 
-        let currentSort = 'latest';
-        let activeTag = null;
-
-        function render(data) {
+        function render() {
             const feed = document.getElementById('matrix-feed');
+            const data = matrixData;
             
-            // 综合过滤：人物 + 标签
             let filteredData = data.filter(d => {
-                const authorMatch = (currentAuthor === 'All' || d.author === currentAuthor);
-                const tagMatch = (!activeTag || (d.tags && d.tags.includes(activeTag)));
-                return authorMatch && tagMatch;
+                if (currentAuthor === 'Bookmarks') return bookmarks.includes(d.id);
+                return (currentAuthor === 'All' || d.author === currentAuthor);
             });
 
-            // 综合排序
-            const sortMode = document.querySelector('.sort-controls .active')?.id || 'sort-latest';
-            if (sortMode === 'sort-latest') {
-                filteredData.sort((a, b) => new Date(b.date) - new Date(a.date));
-            } else if (sortMode === 'sort-oldest') {
-                filteredData.sort((a, b) => new Date(a.date) - new Date(b.date));
-            }
-
-            feed.innerHTML = filteredData.map(item => `
+            feed.innerHTML = filteredData.map(item => {
+                const isBookmarked = bookmarks.includes(item.id);
+                return `
                 <div class="card">
                     <div class="card-header">
                         <span class="author-tag">${item.author}</span>
-                        <div>
-                            ${item.tags ? item.tags.map(t => `<span class="tag" onclick="filterByTag('${t}')">${t}</span>`).join('') : ''}
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <span class="bookmark-btn ${isBookmarked ? 'active' : ''}" onclick="toggleBookmark('${item.id}')">★</span>
                             <span class="date-tag">${item.date}</span>
                         </div>
                     </div>
                     ${item.title ? `<div class="title">${item.title}</div>` : ''}
                     <div class="lang-block">
-                        <div class="lang-en">${item.original}</div>
-                        <div class="lang-zh">${item.translation}</div>
+                        ${(viewMode === 'dual' || viewMode === 'en') ? `<div class="lang-en">${item.original}</div>` : ''}
+                        ${(viewMode === 'dual' || viewMode === 'zh') ? `<div class="lang-zh">${item.translation}</div>` : ''}
                     </div>
                     ${item.media && item.media.length > 0 ? `
-                    <div class="media-container">
-                        ${item.media.map(m => `<img src="${m}" onerror="this.style.display='none'">`).join('')}
-                    </div>` : ''}
-                    <div class="links">
-                        <a href="${item.url}" target="_blank">🔗 访问原文</a>
-                        ${item.links ? item.links.map(l => `<a href="${l}" target="_blank">📄 相关文档</a>`).join('') : ''}
-                    </div>
-                </div>
-            `).join('');
+                    <div class="media-container"><img src="${item.media[0]}" onerror="this.style.display='none'"></div>
+                    ` : ''}
+                </div>`;
+            }).join('');
         }
 
-        function setSort(mode) {
-            document.querySelectorAll('.sort-controls button').forEach(btn => {
-                btn.classList.toggle('active', btn.id === `sort-${mode}`);
-            });
-            switchAuthor(currentAuthor); // 重新触发渲染
+        function setViewMode(mode) {
+            viewMode = mode;
+            document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`view-${mode}`).classList.add('active');
+            render();
         }
 
-        function filterByTag(tag) {
-            activeTag = (activeTag === tag) ? null : tag;
-            // 更新 UI 样式（后续可加到 render 中）
-            switchAuthor(currentAuthor);
+        function toggleBookmark(id) {
+            bookmarks = bookmarks.includes(id) ? bookmarks.filter(b => b !== id) : [...bookmarks, id];
+            localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+            render();
         }
 
         function switchAuthor(author) {
             currentAuthor = author;
-            document.getElementById('author-title').innerText = author === 'All' ? '📂 全部情报' : `📂 ${author}`;
-            const filtered = author === 'All' ? matrixData : matrixData.filter(d => d.author === author);
-            render(filtered);
+            // 更新导航状态
+            document.querySelectorAll('.nav-item, .mobile-nav-item').forEach(item => {
+                item.classList.toggle('active', item.innerText.includes(author === 'All' ? '全部' : author === 'Bookmarks' ? '收藏' : author.split(' ').pop()));
+            });
+            document.getElementById('author-title').innerText = author === 'All' ? '全部情报' : author === 'Bookmarks' ? '已收藏' : author;
+            render();
+            window.scrollTo(0,0);
         }
 
-        function search(val) {
-            const q = val.toLowerCase();
-            const filtered = matrixData.filter(d => 
-                d.original.toLowerCase().includes(q) || 
-                d.translation.toLowerCase().includes(q) ||
-                d.author.toLowerCase().includes(q)
-            );
-            render(filtered);
+        function toggleTheme() {
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            document.body.toggleAttribute('data-theme', !isDark);
+            localStorage.setItem('theme', !isDark ? 'dark' : 'light');
         }
 
-        // 初始化
-        window.onload = () => switchAuthor('All');
+        window.onload = () => {
+            if (localStorage.getItem('theme') === 'dark') document.body.setAttribute('data-theme', 'dark');
+            render();
+        };
     </script>
 </body>
 </html>
