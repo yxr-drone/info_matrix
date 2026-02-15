@@ -220,9 +220,10 @@
             } else if (currentSort === 'hot') {
                 filteredData.sort((a, b) => {
                     const getScore = (item) => {
-                        let score = (item.original.length / 50); // 内容长度加成
+                        let score = item.isHot ? 100 : 0; // 核心：手动置顶或热门内容给超高分
+                        score += (item.original.length / 50);
                         const daysAgo = (new Date() - new Date(item.date)) / (1000 * 60 * 60 * 24);
-                        if (daysAgo < 7) score += 10; // 7天内核弹级加成
+                        if (daysAgo < 14) score += 20; 
                         return score;
                     };
                     return getScore(b) - getScore(a);
@@ -236,6 +237,7 @@
                     <div class="card-header">
                         <span class="author-tag">${item.author}</span>
                         <div style="display: flex; gap: 12px; align-items: center;">
+                            ${item.isHot ? '<span style="color: var(--accent-color); font-weight: bold; font-size: 0.8rem; background: rgba(245, 158, 11, 0.1); padding: 2px 6px; border-radius: 4px;">🔥 热门</span>' : ''}
                             <span class="bookmark-btn ${isBookmarked ? 'active' : ''}" onclick="toggleBookmark('${item.id}')">★</span>
                             <span class="date-tag">${item.date}</span>
                         </div>
